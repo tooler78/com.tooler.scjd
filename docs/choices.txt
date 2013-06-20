@@ -1,0 +1,72 @@
+Marking:
+	General Considerations (80 points)
+	Documentation (50 points)
+	Object-Oriented Design (50 points)
+	GUI (70 points)
+	Locking (80 points)
+	Language Fluency (70 points)
+
+
+1.	General
+1.1	Architecture
+1.2 Package Structure
+1.3 Application startup
+1.4 Shutdown hook
+1.5 Exception handling	
+
+2.	Documentation
+
+3.	Object-Oriented Design
+
+4.	GUI
+	Configuration Dialogs
+	MVC pattern
+	Business Service
+	
+
+5.	Locking
+
+6.	Network
+	RMI 
+	
+	---
+	
+1.	General
+
+* As required, the DB interface has not been changed and is used exactly as
+was intended with the assignment. However, it has been reformatted and its 
+JavaDoc information has been completed to make it easier to use and to be 
+consistent with all other classes/interfaces produced in this application 
+implementation.
+
+* In the delivered version of the implementation, all logging and testing
+code has been removed to make the code clearer and more concise. As a choice
+i decided that all issues/errors would be better served to the user in a UI
+component (for example, an error message dialog). Although detailed logging
+can be very helpful when an issue occurs, a user may not be aware of the 
+logging file without prior reading of a User Guide. This can lead to frustration 
+with regard to "What am i doing wrong" scenario. 
+
+1.2 Package Structure
+
+The following packages 
+suncertify.application	
+Provides the classes necessary for starting and handling shutdown of the application as well as service provider classes for interaction with our data objects.
+suncertify.db	
+Provides the DB interface and its local data file implementation along with all exception classes.
+suncertify.db.lock	
+Provides the classes for the application's locking mechanism.
+suncertify.domain	
+Provides the classes for the domain objects and database schema of the application.
+suncertify.remote	
+Provides classes to provide network connectivity between the client and the server using RMI.
+suncertify.ui	
+Provides all centralized GUI classes required by the UI components of either client or server launched application.
+suncertify.ui.client	
+Provides all client specific GUI classes required for this application to operate as either a networked client or a non-networked client.
+suncertify.ui.server	
+Provides all server specific GUI classes required for this application to operate as a server application.
+
+1.3 Application startup
+1.4 Shutdown hook
+1.5 Exception handling	
