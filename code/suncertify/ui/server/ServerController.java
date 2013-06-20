@@ -39,6 +39,9 @@ public class ServerController implements ServerStateController {
 		if (this.serverView.validateUserEntry()) {
 			this.serverView.storeUserSettings();
 			this.serverModel.start();
+		} else {
+			this.serverView.getInfoPanel().setFailure(
+					"Configuration Information entered is invalid!");
 		}
 	}
 
