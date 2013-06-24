@@ -51,7 +51,7 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public void initialize(final String databaseLocation)
+	public synchronized void initialize(final String databaseLocation)
 			throws InvalidDatabaseException {
 		this.fileAccess = new FileAccess(databaseLocation);
 		this.cache.putAll(this.fileAccess.getAllRecords());
@@ -60,12 +60,12 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public void destroy() throws InvalidDatabaseException {
+	public synchronized void destroy() throws InvalidDatabaseException {
 		try {
 			if (this.fileAccess != null) {
 				this.fileAccess.saveAllRecords(this.cache);
 			}
-		} catch (final IOException e) {
+		} catch (final IOException ioException) {
 			throw new InvalidDatabaseException(
 					"Error while saving records into the database file.");
 		} finally {
