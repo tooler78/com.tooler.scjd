@@ -64,7 +64,7 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 
 	private final JTextField nameField = new JTextField(25);
 	private final JTextField locationField = new JTextField(25);
-	private final JTextField customerIdField = new JTextField(25);
+	private final JTextField customerIdField = new JTextField(15);
 
 	private final JButton bookButton = new JButton();
 	private final JButton clearButton = new JButton();
