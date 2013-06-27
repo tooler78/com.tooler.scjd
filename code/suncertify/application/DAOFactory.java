@@ -4,7 +4,7 @@ import java.rmi.Naming;
 
 import suncertify.db.DB;
 import suncertify.db.Data;
-import suncertify.db.InvalidDatabaseException;
+import suncertify.db.DatabaseException;
 import suncertify.remote.DBFactory;
 import suncertify.remote.DBRemote;
 import suncertify.remote.DBRemoteAdapter;
@@ -57,9 +57,8 @@ public final class DAOFactory {
 		try {
 			Data.getInstance().initialize(
 					DAOFactory.applicationProperties.getDatabaseLocation());
-		} catch (final InvalidDatabaseException invalidDatabaseException) {
-			LaunchApplication.showErrorAndExit(invalidDatabaseException
-					.getMessage());
+		} catch (final DatabaseException databaseException) {
+			LaunchApplication.showErrorAndExit(databaseException.getMessage());
 		}
 		return Data.getInstance();
 	}

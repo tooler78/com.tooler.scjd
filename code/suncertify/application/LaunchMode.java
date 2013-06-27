@@ -1,7 +1,7 @@
 package suncertify.application;
 
 /**
- * The launch mode of the application.
+ * The supported launch mode of the application.
  * <ul>
  * <li>{@link LaunchMode#NETWORK_CLIENT}</li>
  * <li>{@link LaunchMode#SERVER}</li>
@@ -15,13 +15,12 @@ public enum LaunchMode {
 
 	/**
 	 * A networked client via RMI. This is used when the user has not specified
-	 * any command line parameters when starting the application, so we know
-	 * that we are going to be making a networked connection.
+	 * any command line parameters when starting the application.
 	 */
 	NETWORK_CLIENT(null),
 	/**
 	 * Application will be a single JVM incorporating both client and server
-	 * components as one.
+	 * components as one. No networking is allowed when launched in this mode.
 	 */
 	STANDALONE_CLIENT("alone"),
 	/**

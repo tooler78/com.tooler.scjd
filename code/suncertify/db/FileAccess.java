@@ -39,26 +39,25 @@ class FileAccess {
 	 * 
 	 * @throws IOException
 	 *             error while accessing the file.
-	 * @throws InvalidDatabaseException
+	 * @throws DatabaseException
 	 *             the invalid database exception
 	 */
-	public FileAccess(final String databaseLocation)
-			throws InvalidDatabaseException {
+	public FileAccess(final String databaseLocation) throws DatabaseException {
 		this.validateDatabase(databaseLocation);
 	}
 
 	private void validateDatabase(final String databaseLocation)
-			throws InvalidDatabaseException {
+			throws DatabaseException {
 		int magicCookie = -1;
 		try {
 			FileAccess.database = new RandomAccessFile(databaseLocation, "rw");
 			magicCookie = FileAccess.database.readInt();
 		} catch (final IOException ioException) {
-			throw new InvalidDatabaseException(
+			throw new DatabaseException(
 					"Error while accessing the database file.");
 		}
 		if (DatabaseSchema.EXPECTED_MAGIC_COOKIE_VALUE != magicCookie) {
-			throw new InvalidDatabaseException(
+			throw new DatabaseException(
 					"Incompatible database - database supplied cannot be used by this application.");
 		}
 	}
@@ -68,12 +67,12 @@ class FileAccess {
 	 * 
 	 * @return A collection of all the {@code Subcontractors} in a map keyed on
 	 *         record numbers based on location in the database
-	 * @throws InvalidDatabaseException
+	 * @throws DatabaseException
 	 * @throws IOException
 	 *             error while accessing the file
 	 */
 	public ConcurrentSkipListMap<Integer, Subcontractor> getAllRecords()
-			throws InvalidDatabaseException {
+			throws DatabaseException {
 		final ConcurrentSkipListMap<Integer, Subcontractor> result = new ConcurrentSkipListMap<Integer, Subcontractor>();
 		int recNo = 1;
 
@@ -85,7 +84,7 @@ class FileAccess {
 				recNo++;
 			}
 		} catch (final IOException ioException) {
-			throw new InvalidDatabaseException(
+			throw new DatabaseException(
 					"Error while accessing the database file.");
 		} finally {
 			FileAccess.dbReadWriteLock.writeLock().unlock();

@@ -12,10 +12,11 @@ import suncertify.application.ApplicationProperties;
 
 /**
  * This class is a utility class for browsing the file system via a
- * {@link JFileChooser}. Files of type {@link UserEntryPanel#DATABASE_EXTENSION}
- * is the expected user selection. This class extends the {@link Observable}
- * class and notifies all interested classes of any state change in the chosen
- * database location by the user.
+ * {@link JFileChooser}. Files of type
+ * {@link ApplicationProperties#DATABASE_EXTENSION} is the expected user
+ * selection. This class extends the {@link Observable} class and notifies all
+ * interested classes of any state change in the chosen database location by the
+ * user.
  * 
  * @version 1.0
  * @author Damien O'Toole

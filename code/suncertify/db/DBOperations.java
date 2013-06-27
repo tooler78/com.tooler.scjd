@@ -8,7 +8,7 @@ package suncertify.db;
  * extra functionality that may be required outside of <i>CRUD</i> use-cases,
  * for example any initial setup required for data access.
  * <p>
- * Note: {@link DBOperations#initialize()} must be called before any other
+ * Note: {@link DBOperations#initialize(String)} must be called before any other
  * method is invoked on implementation classes of the {@code DB} interface.
  * 
  * @version 1.0
@@ -22,11 +22,11 @@ interface DBOperations extends DB {
 	 * 
 	 * @param databaseLocation
 	 *            the database location
-	 * @throws InvalidDatabaseException
+	 * @throws DatabaseException
 	 *             the invalid database exception
 	 */
 	public void initialize(final String databaseLocation)
-			throws InvalidDatabaseException;
+			throws DatabaseException;
 
 	/**
 	 * Destroy the data access component so that any resources are released or
@@ -34,12 +34,12 @@ interface DBOperations extends DB {
 	 * interface.
 	 * <p>
 	 * On invocation of this method, the implementation class will require it's
-	 * {@link DBOperations#initialize()} method to be called before and request
+	 * {@link DBOperations#initialize(String)} method to be called before and request
 	 * of <i>CRUD</i> operations is allowed
 	 * 
-	 * @throws InvalidDatabaseException
+	 * @throws DatabaseException
 	 *             the invalid database exception
 	 */
-	public void destroy() throws InvalidDatabaseException;
+	public void destroy() throws DatabaseException;
 
 }

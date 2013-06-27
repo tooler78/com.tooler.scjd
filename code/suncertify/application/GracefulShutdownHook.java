@@ -6,7 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import suncertify.db.Data;
-import suncertify.db.InvalidDatabaseException;
+import suncertify.db.DatabaseException;
 import suncertify.remote.DBFactory;
 
 /**
@@ -75,9 +75,8 @@ public class GracefulShutdownHook extends Thread {
 	private void saveAllDataToFile() {
 		try {
 			Data.getInstance().destroy();
-		} catch (final InvalidDatabaseException invalidDatabaseException) {
-			LaunchApplication.showErrorAndExit(invalidDatabaseException
-					.getMessage());
+		} catch (final DatabaseException databaseException) {
+			LaunchApplication.showErrorAndExit(databaseException.getMessage());
 		}
 	}
 

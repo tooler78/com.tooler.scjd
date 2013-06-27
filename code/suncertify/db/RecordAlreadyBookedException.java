@@ -1,7 +1,7 @@
 package suncertify.db;
 
 /**
- * Exception class thrown if during an attempt to book a record it fails to
+ * Instances of this exception class are thrown if during an attempt to book a record it fails to
  * succeed as it has already been booked.
  * 
  * @version 1.0

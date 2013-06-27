@@ -19,7 +19,7 @@ public interface ServerStateListener {
 	/**
 	 * Handle {@link ServerState} change events.
 	 * 
-	 * @param state
+	 * @param stateNotification
 	 *            the {@code ServerStateNotification} containing the updated
 	 *            {@code ServerState}
 	 */

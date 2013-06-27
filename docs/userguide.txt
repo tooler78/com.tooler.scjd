@@ -10,7 +10,7 @@ Table of Contents
 2.3 Configuration in stand-alone mode
 3.  Server mode
 4.  Client and stand-alone mode
-4.1 GUI overview
+4.1 GUI Overview
 4.2 Retrieving all Subcontractors
 4.3 Searching for Subcontractors
 4.4 Booking a Subcontractor
@@ -107,7 +107,7 @@ application's use cases. The Bodgitt and Scarper CSR Booking System GUI presente
 identical in both modes. The only difference is with regard to the actual operations being 
 invoked either locally (stand-alone mode) or remotely (client mode). 
 
-4.1 GUI overview
+4.1 GUI Overview
 The Bodgitt and Scarper CSR Booking System GUI layout is split into two distinct sections:
 - Tabbed Panes
 	There are two distinct tabs. The Search tab is to assist the user with finding 

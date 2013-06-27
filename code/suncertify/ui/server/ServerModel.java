@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import suncertify.application.ApplicationProperties;
 import suncertify.db.Data;
-import suncertify.db.InvalidDatabaseException;
+import suncertify.db.DatabaseException;
 import suncertify.remote.DBFactory;
 import suncertify.remote.DBFactoryProvider;
 
@@ -53,10 +53,9 @@ public class ServerModel implements ServerStateModel {
 		try {
 			this.initDBConnectionSuccessful();
 			this.registerDBinRmiSuccessful();
-		} catch (final InvalidDatabaseException invalidDatabaseException) {
+		} catch (final DatabaseException databaseException) {
 			stateNotification.setServerState(ServerState.FAILED);
-			stateNotification.setInfoMessage(invalidDatabaseException
-					.getMessage());
+			stateNotification.setInfoMessage(databaseException.getMessage());
 		} catch (final RemoteException remoteException) {
 			stateNotification.setServerState(ServerState.FAILED);
 			stateNotification.setInfoMessage(ServerModel.REGISTRY_START_ERROR);
@@ -65,7 +64,7 @@ public class ServerModel implements ServerStateModel {
 		}
 	}
 
-	private void initDBConnectionSuccessful() throws InvalidDatabaseException {
+	private void initDBConnectionSuccessful() throws DatabaseException {
 		Data.getInstance().initialize(
 				this.applicationProperties.getDatabaseLocation());
 	}

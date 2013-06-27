@@ -1,8 +1,8 @@
 package suncertify.db;
 
 /**
- * Exception class thrown by {@code DB} methods if a specified record does not
- * exist or is marked as deleted in the database file
+ * Instances of this exception class are thrown by {@code DB} methods if a
+ * specified record does not exist or is marked as deleted in the database file.
  * 
  * @version 1.0
  * @author Damien O'Toole
