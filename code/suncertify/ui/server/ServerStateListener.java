@@ -23,7 +23,6 @@ public interface ServerStateListener {
 	 *            the {@code ServerStateNotification} containing the updated
 	 *            {@code ServerState}
 	 */
-	public void handleStateChange(
-			final ServerStateNotification stateNotification);
+	public void handleStateChange(final ServerStateNotification stateNotification);
 
 }

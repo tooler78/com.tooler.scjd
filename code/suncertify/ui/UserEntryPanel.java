@@ -88,8 +88,7 @@ public abstract class UserEntryPanel extends JPanel {
 	protected boolean invalidDbLocation(final String dbLocation) {
 		boolean result = true;
 		final File file = new File(dbLocation);
-		if (dbLocation.endsWith(ApplicationProperties.DATABASE_EXTENSION)
-				&& file.exists()) {
+		if (dbLocation.endsWith(ApplicationProperties.DATABASE_EXTENSION) && file.exists()) {
 			result = false;
 		}
 		return result;
@@ -107,8 +106,7 @@ public abstract class UserEntryPanel extends JPanel {
 		boolean result = true;
 		try {
 			final int port = Integer.parseInt(portNumber);
-			if (port >= UserEntryPanel.MIN_PORT_RANGE
-					&& port <= UserEntryPanel.MAX_PORT_RANGE) {
+			if (port >= UserEntryPanel.MIN_PORT_RANGE && port <= UserEntryPanel.MAX_PORT_RANGE) {
 				result = false;
 			}
 		} catch (final NumberFormatException e) {

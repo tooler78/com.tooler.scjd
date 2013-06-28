@@ -21,8 +21,7 @@ import suncertify.ui.UICommand;
  * @version 1.0
  * @author Damien O'Toole
  */
-public class ServerWindow extends JFrame implements ActionListener,
-		ServerStateListener, ServerView {
+public class ServerWindow extends JFrame implements ActionListener, ServerStateListener, ServerView {
 
 	private static final long serialVersionUID = 1881033106774792490L;
 
@@ -46,8 +45,7 @@ public class ServerWindow extends JFrame implements ActionListener,
 	 *            notifies this {@code ServerView} when there has been a change
 	 *            in its state.
 	 */
-	public ServerWindow(final ServerStateController controller,
-			final ServerStateModel model) {
+	public ServerWindow(final ServerStateController controller, final ServerStateModel model) {
 		super("Bodgitt and Scarper");
 		this.controller = controller;
 		this.model = model;
@@ -117,8 +115,7 @@ public class ServerWindow extends JFrame implements ActionListener,
 
 	/** {@inheritDoc} */
 	@Override
-	public void handleStateChange(
-			final ServerStateNotification stateNotification) {
+	public void handleStateChange(final ServerStateNotification stateNotification) {
 		this.controller.stateChanged(stateNotification);
 	}
 

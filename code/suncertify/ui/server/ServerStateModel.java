@@ -53,7 +53,6 @@ public interface ServerStateModel {
 	 *            the {@link ServerStateNotification} object containing
 	 *            information of the new {@link ServerState}
 	 */
-	public void notifyServerStateListeners(
-			final ServerStateNotification stateNotification);
+	public void notifyServerStateListeners(final ServerStateNotification stateNotification);
 
 }

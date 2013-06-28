@@ -73,9 +73,8 @@ public class LaunchApplication {
 	}
 
 	private void displayUsageAndExit() {
-		System.err
-				.println("Invalid parameter(s) passed in when starting the application: "
-						+ Arrays.toString(this.cmdLineArgs));
+		System.err.println("Invalid parameter(s) passed in when starting the application: "
+				+ Arrays.toString(this.cmdLineArgs));
 		System.err.println("Command line options may be one of:");
 		System.err.println("\"server\" - starts server application");
 		System.err.println("\"alone\"  - starts non-networked client");
@@ -119,8 +118,7 @@ public class LaunchApplication {
 
 	private void startServer() {
 		final ServerStateModel serverModel = new ServerModel();
-		final ServerStateController serverController = new ServerController(
-				serverModel);
+		final ServerStateController serverController = new ServerController(serverModel);
 		serverController.displayView();
 	}
 
@@ -168,8 +166,8 @@ public class LaunchApplication {
 	}
 
 	private static JDialog createErrorDialog(final String message) {
-		final JOptionPane alert = new JOptionPane(message,
-				JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION);
+		final JOptionPane alert = new JOptionPane(message, JOptionPane.ERROR_MESSAGE,
+				JOptionPane.DEFAULT_OPTION);
 		final JDialog dialog = alert.createDialog(null, "Error");
 
 		// Center on screen

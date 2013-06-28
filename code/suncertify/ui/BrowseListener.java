@@ -29,8 +29,7 @@ public class BrowseListener extends Observable implements ActionListener {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent actionEvent) {
-		final JFileChooser chooser = new JFileChooser(
-				System.getProperty("user.dir"));
+		final JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 		chooser.setFileFilter(new FileFilter() {
 
 			@Override
@@ -41,8 +40,7 @@ public class BrowseListener extends Observable implements ActionListener {
 			@Override
 			public boolean accept(final File file) {
 				if (file.isFile()) {
-					return file.getName().endsWith(
-							ApplicationProperties.DATABASE_EXTENSION);
+					return file.getName().endsWith(ApplicationProperties.DATABASE_EXTENSION);
 				}
 				return true;
 			}

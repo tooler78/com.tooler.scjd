@@ -54,20 +54,17 @@ public class ClientController implements SubcontractorController {
 		try {
 			final Subcontractor contractorToBeBooked = this.model
 					.getSubcontractor(currentRowSelection);
-			this.model.bookSubcontractor(contractorToBeBooked, customerID,
-					currentRowSelection);
+			this.model.bookSubcontractor(contractorToBeBooked, customerID, currentRowSelection);
 		} catch (final RecordNotFoundException recordNotFoundException) {
 			this.view
 					.displayErrorMessage("The selected Subcontractor information can not be found!");
 		} catch (final RecordAlreadyBookedException recordAlreadyBookedException) {
-			this.view
-					.displayErrorMessage("The selected Subcontractor is already booked.");
+			this.view.displayErrorMessage("The selected Subcontractor is already booked.");
 		}
 	}
 
 	private boolean invalidCustomerID(final String customerID) {
-		if (Pattern.matches("[a-zA-Z]+", customerID) == false
-				&& customerID.length() == 8) {
+		if (Pattern.matches("[a-zA-Z]+", customerID) == false && customerID.length() == 8) {
 			return false;
 		}
 		return true;

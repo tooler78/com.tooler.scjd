@@ -33,8 +33,7 @@ public class TestJarSubmission {
 	 * A subdirectory called javadoc, containing HTML/Javadoc documentation for
 	 * all classes and interfaces you are submitting.
 	 */
-	private static final String DIR_JAVADOC = TestJarSubmission.DIR_DOCS
-			+ "/javadoc";
+	private static final String DIR_JAVADOC = TestJarSubmission.DIR_DOCS + "/javadoc";
 
 	/**
 	 * The original, unchanged database file that was supplied to you. Note that
@@ -52,8 +51,7 @@ public class TestJarSubmission {
 	 * should also describe any uncertainties you had regarding the project, and
 	 * the decisions you made when resolving them.
 	 */
-	private static final String FILE_CHOICES = TestJarSubmission.DIR_DOCS
-			+ "/choices.txt";
+	private static final String FILE_CHOICES = TestJarSubmission.DIR_DOCS + "/choices.txt";
 
 	/**
 	 * The executable JAR containing the programs. This must be called
@@ -70,8 +68,7 @@ public class TestJarSubmission {
 	/**
 	 * The index.html file of the HTML/Javadoc documentation.
 	 */
-	private static final String FILE_JAVADOC = TestJarSubmission.DIR_JAVADOC
-			+ "/index.html";
+	private static final String FILE_JAVADOC = TestJarSubmission.DIR_JAVADOC + "/index.html";
 
 	/**
 	 * User documentation for the database server and the gui client. If your
@@ -81,8 +78,7 @@ public class TestJarSubmission {
 	 * userguide.txt, or multiple HTML files which must all be accessible from a
 	 * starting point document that must be called userguide.html.
 	 */
-	private static final String FILE_USERGUIDE = TestJarSubmission.DIR_DOCS
-			+ "/userguide.txt";
+	private static final String FILE_USERGUIDE = TestJarSubmission.DIR_DOCS + "/userguide.txt";
 
 	/**
 	 * A file called version.txt. This must contain pure ASCII (not a word
@@ -118,9 +114,8 @@ public class TestJarSubmission {
 	/**
 	 * The required directories in the submission jar.
 	 */
-	private static final String[] REQUIRED_DIRECTORIES = new String[] {
-			TestJarSubmission.DIR_CODE, TestJarSubmission.DIR_DOCS,
-			TestJarSubmission.DIR_JAVADOC };
+	private static final String[] REQUIRED_DIRECTORIES = new String[] { TestJarSubmission.DIR_CODE,
+			TestJarSubmission.DIR_DOCS, TestJarSubmission.DIR_JAVADOC };
 
 	/**
 	 * The expected count of required directories in the submission jar.
@@ -130,12 +125,10 @@ public class TestJarSubmission {
 	/**
 	 * The required files in the submission jar.
 	 */
-	private static final String[] REQUIRED_FILES = new String[] {
-			TestJarSubmission.FILE_DB, TestJarSubmission.FILE_CHOICES,
-			TestJarSubmission.FILE_EXECUTABLE_JAR,
-			TestJarSubmission.FILE_INSTRUCTIONS,
-			TestJarSubmission.FILE_JAVADOC, TestJarSubmission.FILE_USERGUIDE,
-			TestJarSubmission.FILE_VERSION };
+	private static final String[] REQUIRED_FILES = new String[] { TestJarSubmission.FILE_DB,
+			TestJarSubmission.FILE_CHOICES, TestJarSubmission.FILE_EXECUTABLE_JAR,
+			TestJarSubmission.FILE_INSTRUCTIONS, TestJarSubmission.FILE_JAVADOC,
+			TestJarSubmission.FILE_USERGUIDE, TestJarSubmission.FILE_VERSION };
 
 	/**
 	 * The expected count of required files in the submission jar.
@@ -145,9 +138,8 @@ public class TestJarSubmission {
 	/**
 	 * The required sources in the submission jar.
 	 */
-	private static final String[] REQUIRED_SOURCES = new String[] {
-			TestJarSubmission.SOURCE_DATA, TestJarSubmission.SOURCE_DBMAIN,
-			TestJarSubmission.SOURCE_EXCEPTION_DK,
+	private static final String[] REQUIRED_SOURCES = new String[] { TestJarSubmission.SOURCE_DATA,
+			TestJarSubmission.SOURCE_DBMAIN, TestJarSubmission.SOURCE_EXCEPTION_DK,
 			TestJarSubmission.SOURCE_EXCEPTION_RNF };
 
 	/**
@@ -163,10 +155,8 @@ public class TestJarSubmission {
 		Assert.assertEquals(TestJarSubmission.REQUIRED_DIRECTORIES_COUNT,
 				TestJarSubmission.REQUIRED_DIRECTORIES.length);
 		for (final String directory : TestJarSubmission.REQUIRED_DIRECTORIES) {
-			final File f = new File(TestJarSubmission.DIR_SUBMISSION_JAR,
-					directory);
-			Assert.assertTrue("directory '" + directory + "' not exists",
-					f.exists());
+			final File f = new File(TestJarSubmission.DIR_SUBMISSION_JAR, directory);
+			Assert.assertTrue("directory '" + directory + "' not exists", f.exists());
 		}
 	}
 
@@ -191,8 +181,7 @@ public class TestJarSubmission {
 		Assert.assertEquals(TestJarSubmission.REQUIRED_SOURCES_COUNT,
 				TestJarSubmission.REQUIRED_SOURCES.length);
 		for (final String source : TestJarSubmission.REQUIRED_SOURCES) {
-			final File f = new File(TestJarSubmission.DIR_SUBMISSION_JAR,
-					source);
+			final File f = new File(TestJarSubmission.DIR_SUBMISSION_JAR, source);
 			Assert.assertTrue("source '" + source + "' not exists", f.exists());
 		}
 	}

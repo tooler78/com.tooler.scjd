@@ -38,36 +38,27 @@ public class NetworkClientUserEntry extends UserEntryPanel {
 		this.serverAddressField = new JTextField(30);
 		this.portNumber = new JTextField(30);
 
-		final JLabel serverNameLabel = new JLabel(
-				NetworkClientUserEntry.SERVER_ADDRESS_LABEL);
-		UserEntryPanel.gridBag.setConstraints(serverNameLabel,
-				UserEntryPanel.constraints);
+		final JLabel serverNameLabel = new JLabel(NetworkClientUserEntry.SERVER_ADDRESS_LABEL);
+		UserEntryPanel.gridBag.setConstraints(serverNameLabel, UserEntryPanel.constraints);
 		this.add(serverNameLabel);
 
-		this.serverAddressField
-				.setToolTipText(NetworkClientUserEntry.SERVER_ADDRESS_TOOLTIP);
-		this.serverAddressField.setText(this.applicationProperties
-				.getServerAddress());
+		this.serverAddressField.setToolTipText(NetworkClientUserEntry.SERVER_ADDRESS_TOOLTIP);
+		this.serverAddressField.setText(this.applicationProperties.getServerAddress());
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.REMAINDER;
-		UserEntryPanel.gridBag.setConstraints(this.serverAddressField,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.serverAddressField, UserEntryPanel.constraints);
 		this.add(this.serverAddressField);
 
-		final JLabel portNumberLabel = new JLabel(
-				NetworkClientUserEntry.SERVER_PORT_LABEL);
+		final JLabel portNumberLabel = new JLabel(NetworkClientUserEntry.SERVER_PORT_LABEL);
 		UserEntryPanel.constraints.gridwidth = 1;
 		UserEntryPanel.constraints.anchor = GridBagConstraints.EAST;
-		UserEntryPanel.gridBag.setConstraints(portNumberLabel,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(portNumberLabel, UserEntryPanel.constraints);
 		this.add(portNumberLabel);
 
-		this.portNumber
-				.setToolTipText(NetworkClientUserEntry.SERVER_PORT_TOOLTIP);
+		this.portNumber.setToolTipText(NetworkClientUserEntry.SERVER_PORT_TOOLTIP);
 		this.portNumber.setText(this.applicationProperties.getServerPort());
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.REMAINDER;
 		UserEntryPanel.constraints.anchor = GridBagConstraints.WEST;
-		UserEntryPanel.gridBag.setConstraints(this.portNumber,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.portNumber, UserEntryPanel.constraints);
 		this.add(this.portNumber);
 	}
 
@@ -76,14 +67,12 @@ public class NetworkClientUserEntry extends UserEntryPanel {
 	public boolean validateUserEntry() {
 		boolean result = true;
 		if (this.invalidServerAddress()) {
-			LaunchApplication
-					.showError("Server Address entered is not contactable!");
+			LaunchApplication.showError("Server Address entered is not contactable!");
 			result = false;
 		} else if (this.invalidPortNumber(this.portNumber.getText())) {
 			LaunchApplication.showError("Error in Port Number entry!"
 					+ "\nPort Number must be a numeric value between "
-					+ UserEntryPanel.MIN_PORT_RANGE + "-"
-					+ UserEntryPanel.MAX_PORT_RANGE);
+					+ UserEntryPanel.MIN_PORT_RANGE + "-" + UserEntryPanel.MAX_PORT_RANGE);
 			result = false;
 		}
 		return result;
@@ -102,8 +91,7 @@ public class NetworkClientUserEntry extends UserEntryPanel {
 	/** {@inheritDoc} */
 	@Override
 	public void storeUserEntry() {
-		this.applicationProperties.setServerAddress(this.serverAddressField
-				.getText());
+		this.applicationProperties.setServerAddress(this.serverAddressField.getText());
 		this.applicationProperties.setServerPort(this.portNumber.getText());
 	}
 

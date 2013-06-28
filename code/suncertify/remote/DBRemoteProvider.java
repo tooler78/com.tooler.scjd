@@ -18,8 +18,7 @@ import suncertify.db.RecordNotFoundException;
  * @version 1.0
  * @author Damien O'Toole
  */
-public final class DBRemoteProvider extends UnicastRemoteObject implements
-		DBRemote {
+public final class DBRemoteProvider extends UnicastRemoteObject implements DBRemote {
 
 	private static final long serialVersionUID = -6199759573206229884L;
 
@@ -45,16 +44,15 @@ public final class DBRemoteProvider extends UnicastRemoteObject implements
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(final int recNo, final String[] data,
-			final long lockCookie) throws RecordNotFoundException,
-			SecurityException {
+	public void update(final int recNo, final String[] data, final long lockCookie)
+			throws RecordNotFoundException, SecurityException {
 		this.db.update(recNo, data, lockCookie);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void delete(final int recNo, final long lockCookie)
-			throws RecordNotFoundException, SecurityException {
+	public void delete(final int recNo, final long lockCookie) throws RecordNotFoundException,
+			SecurityException {
 		this.db.delete(recNo, lockCookie);
 	}
 
@@ -78,8 +76,8 @@ public final class DBRemoteProvider extends UnicastRemoteObject implements
 
 	/** {@inheritDoc} */
 	@Override
-	public void unlock(final int recNo, final long cookie)
-			throws RecordNotFoundException, SecurityException {
+	public void unlock(final int recNo, final long cookie) throws RecordNotFoundException,
+			SecurityException {
 		this.db.unlock(recNo, cookie);
 	}
 

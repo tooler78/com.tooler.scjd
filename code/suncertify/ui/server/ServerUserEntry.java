@@ -43,45 +43,35 @@ public class ServerUserEntry extends UserEntryPanel implements Observer {
 		this.portNumber = new JTextField(30);
 		this.browseButton = new JButton(UICommand.BROWSE.getActionCommand());
 
-		final JLabel dbLocationLabel = new JLabel(
-				ServerUserEntry.DB_LOCATION_LABEL);
-		UserEntryPanel.gridBag.setConstraints(dbLocationLabel,
-				UserEntryPanel.constraints);
+		final JLabel dbLocationLabel = new JLabel(ServerUserEntry.DB_LOCATION_LABEL);
+		UserEntryPanel.gridBag.setConstraints(dbLocationLabel, UserEntryPanel.constraints);
 		this.add(dbLocationLabel);
 
-		this.dbLocationField
-				.setToolTipText(ServerUserEntry.DB_LOCATION_TOOLTIP);
-		this.dbLocationField.setText(this.applicationProperties
-				.getDatabaseLocation());
+		this.dbLocationField.setToolTipText(ServerUserEntry.DB_LOCATION_TOOLTIP);
+		this.dbLocationField.setText(this.applicationProperties.getDatabaseLocation());
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.RELATIVE;
-		UserEntryPanel.gridBag.setConstraints(this.dbLocationField,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.dbLocationField, UserEntryPanel.constraints);
 		this.add(this.dbLocationField);
 
-		this.browseButton.setToolTipText(UICommand.BROWSE
-				.getActionCommandToolTip());
+		this.browseButton.setToolTipText(UICommand.BROWSE.getActionCommandToolTip());
 		final BrowseListener browseListener = new BrowseListener();
 		browseListener.addObserver(this);
 		this.browseButton.addActionListener(browseListener);
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.REMAINDER;
-		UserEntryPanel.gridBag.setConstraints(this.browseButton,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.browseButton, UserEntryPanel.constraints);
 		this.add(this.browseButton);
 
-		final JLabel portNumberLabel = new JLabel(
-				ServerUserEntry.SERVER_PORT_LABEL);
+		final JLabel portNumberLabel = new JLabel(ServerUserEntry.SERVER_PORT_LABEL);
 		UserEntryPanel.constraints.gridwidth = 1;
 		UserEntryPanel.constraints.anchor = GridBagConstraints.EAST;
-		UserEntryPanel.gridBag.setConstraints(portNumberLabel,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(portNumberLabel, UserEntryPanel.constraints);
 		this.add(portNumberLabel);
 
 		this.portNumber.setToolTipText(ServerUserEntry.SERVER_PORT_TOOLTIP);
 		this.portNumber.setText(this.applicationProperties.getServerPort());
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.REMAINDER;
 		UserEntryPanel.constraints.anchor = GridBagConstraints.WEST;
-		UserEntryPanel.gridBag.setConstraints(this.portNumber,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.portNumber, UserEntryPanel.constraints);
 		this.add(this.portNumber);
 	}
 
@@ -90,15 +80,13 @@ public class ServerUserEntry extends UserEntryPanel implements Observer {
 	public boolean validateUserEntry() {
 		boolean result = true;
 		if (this.invalidDbLocation(this.dbLocationField.getText())) {
-			LaunchApplication
-					.showError("The database location entered is not a valid file!");
+			LaunchApplication.showError("The database location entered is not a valid file!");
 			result = false;
 		}
 		if (this.invalidPortNumber(this.portNumber.getText())) {
 			LaunchApplication.showError("Error in Port Number entry!"
 					+ "\nPort Number must be a numeric value between "
-					+ UserEntryPanel.MIN_PORT_RANGE + "-"
-					+ UserEntryPanel.MAX_PORT_RANGE);
+					+ UserEntryPanel.MIN_PORT_RANGE + "-" + UserEntryPanel.MAX_PORT_RANGE);
 			result = false;
 		}
 		return result;
@@ -107,8 +95,7 @@ public class ServerUserEntry extends UserEntryPanel implements Observer {
 	/** {@inheritDoc} */
 	@Override
 	public void storeUserEntry() {
-		this.applicationProperties.setDatabaseLocation(this.dbLocationField
-				.getText());
+		this.applicationProperties.setDatabaseLocation(this.dbLocationField.getText());
 		this.applicationProperties.setServerPort(this.portNumber.getText());
 	}
 

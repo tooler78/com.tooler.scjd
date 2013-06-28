@@ -70,8 +70,7 @@ public class Subcontractor {
 	 *            String array of the attributes associated with this
 	 *            {@code Subcontractor}
 	 */
-	public Subcontractor(final int recordNumber, final RecordState state,
-			final String[] data) {
+	public Subcontractor(final int recordNumber, final RecordState state, final String[] data) {
 		this.recordNumber = recordNumber;
 		this.state = state;
 		this.setData(data);
@@ -311,10 +310,9 @@ public class Subcontractor {
 	 */
 	@Override
 	public String toString() {
-		return "Subcontractor [recordNumber:" + this.recordNumber + ", state:"
-				+ this.state + ", name:" + this.name + ", location:"
-				+ this.location + ", specialties:" + this.specialties
-				+ ", size:" + this.size + ", rate:" + this.rate + ", owner:"
+		return "Subcontractor [recordNumber:" + this.recordNumber + ", state:" + this.state
+				+ ", name:" + this.name + ", location:" + this.location + ", specialties:"
+				+ this.specialties + ", size:" + this.size + ", rate:" + this.rate + ", owner:"
 				+ this.owner + "]";
 	}
 

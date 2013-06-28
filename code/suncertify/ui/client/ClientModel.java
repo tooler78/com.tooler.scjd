@@ -28,13 +28,12 @@ import suncertify.domain.Subcontractor;
  * @version 1.0
  * @author Damien O'Toole
  */
-public class ClientModel extends AbstractTableModel implements
-		SubcontractorModel {
+public class ClientModel extends AbstractTableModel implements SubcontractorModel {
 
 	private static final long serialVersionUID = -3233583889750841588L;
 
-	private static final String[] COLUMN_NAMES = { "Name", "Location",
-			"Specialties", "Size", "Rate", "Owner" };
+	private static final String[] COLUMN_NAMES = { "Name", "Location", "Specialties", "Size",
+			"Rate", "Owner" };
 
 	private List<Subcontractor> subContractors = new ArrayList<Subcontractor>();
 
@@ -75,10 +74,8 @@ public class ClientModel extends AbstractTableModel implements
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		Object value = null;
-		if (this.subContractors != null
-				&& this.subContractors.size() > rowIndex) {
-			final Subcontractor subContractor = this.subContractors
-					.get(rowIndex);
+		if (this.subContractors != null && this.subContractors.size() > rowIndex) {
+			final Subcontractor subContractor = this.subContractors.get(rowIndex);
 			switch (columnIndex) {
 			case Subcontractor.INDEX_NAME:
 				value = subContractor.getName();
@@ -105,12 +102,12 @@ public class ClientModel extends AbstractTableModel implements
 
 	/** {@inheritDoc} */
 	@Override
-	public void bookSubcontractor(final Subcontractor subContractor,
-			final String customerID, final int currentRowSelection)
-			throws RecordNotFoundException, RecordAlreadyBookedException {
+	public void bookSubcontractor(final Subcontractor subContractor, final String customerID,
+			final int currentRowSelection) throws RecordNotFoundException,
+			RecordAlreadyBookedException {
 		try {
-			this.subContractors = this.dbService.bookSubcontractor(
-					subContractor, this.subContractors, customerID);
+			this.subContractors = this.dbService.bookSubcontractor(subContractor,
+					this.subContractors, customerID);
 
 		} finally {
 			this.fireTableRowsUpdated(currentRowSelection, currentRowSelection);
@@ -121,8 +118,8 @@ public class ClientModel extends AbstractTableModel implements
 	@Override
 	public void searchSubcontractor(final String name, final String location,
 			final boolean exactMatchRequired) {
-		this.subContractors = this.dbService.searchSubcontractor(name,
-				location, exactMatchRequired);
+		this.subContractors = this.dbService
+				.searchSubcontractor(name, location, exactMatchRequired);
 		this.fireTableDataChanged();
 	}
 

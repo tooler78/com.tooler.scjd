@@ -39,31 +39,24 @@ public class StandaloneUserEntry extends UserEntryPanel implements Observer {
 		this.dbLocationField = new JTextField(42);
 		this.browseButton = new JButton(UICommand.BROWSE.getActionCommand());
 
-		final JLabel dbLocationLabel = new JLabel(
-				StandaloneUserEntry.DB_LOCATION_LABEL);
-		UserEntryPanel.gridBag.setConstraints(dbLocationLabel,
-				UserEntryPanel.constraints);
+		final JLabel dbLocationLabel = new JLabel(StandaloneUserEntry.DB_LOCATION_LABEL);
+		UserEntryPanel.gridBag.setConstraints(dbLocationLabel, UserEntryPanel.constraints);
 		this.add(dbLocationLabel);
 
-		this.dbLocationField
-				.setToolTipText(StandaloneUserEntry.DB_LOCATION_TOOLTIP);
-		this.dbLocationField.setText(this.applicationProperties
-				.getDatabaseLocation());
+		this.dbLocationField.setToolTipText(StandaloneUserEntry.DB_LOCATION_TOOLTIP);
+		this.dbLocationField.setText(this.applicationProperties.getDatabaseLocation());
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.RELATIVE;
-		UserEntryPanel.gridBag.setConstraints(this.dbLocationField,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.dbLocationField, UserEntryPanel.constraints);
 		this.add(this.dbLocationField);
 
 		this.browseButton.setText(UICommand.BROWSE.getActionCommand());
-		this.browseButton.setToolTipText(UICommand.BROWSE
-				.getActionCommandToolTip());
+		this.browseButton.setToolTipText(UICommand.BROWSE.getActionCommandToolTip());
 		this.browseButton.setMnemonic(UICommand.BROWSE.getKeyEvent());
 		final BrowseListener browseListener = new BrowseListener();
 		browseListener.addObserver(this);
 		this.browseButton.addActionListener(browseListener);
 		UserEntryPanel.constraints.gridwidth = GridBagConstraints.REMAINDER;
-		UserEntryPanel.gridBag.setConstraints(this.browseButton,
-				UserEntryPanel.constraints);
+		UserEntryPanel.gridBag.setConstraints(this.browseButton, UserEntryPanel.constraints);
 		this.add(this.browseButton);
 	}
 
@@ -72,8 +65,7 @@ public class StandaloneUserEntry extends UserEntryPanel implements Observer {
 	public boolean validateUserEntry() {
 		boolean result = true;
 		if (this.invalidDbLocation(this.dbLocationField.getText())) {
-			LaunchApplication
-					.showError("The database location entered is not a valid file!");
+			LaunchApplication.showError("The database location entered is not a valid file!");
 			result = false;
 		}
 		return result;
@@ -82,8 +74,7 @@ public class StandaloneUserEntry extends UserEntryPanel implements Observer {
 	/** {@inheritDoc} */
 	@Override
 	public void storeUserEntry() {
-		this.applicationProperties.setDatabaseLocation(this.dbLocationField
-				.getText());
+		this.applicationProperties.setDatabaseLocation(this.dbLocationField.getText());
 	}
 
 	/** {@inheritDoc} */

@@ -92,8 +92,8 @@ public class ClientStartUpDialog extends JPanel implements ActionListener {
 	 * Display the dialog.
 	 */
 	public void displayDialog() {
-		final JOptionPane pane = new JOptionPane(this,
-				JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+		final JOptionPane pane = new JOptionPane(this, JOptionPane.QUESTION_MESSAGE,
+				JOptionPane.OK_CANCEL_OPTION);
 		this.dialog = pane.createDialog("Client Properties");
 		this.dialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 

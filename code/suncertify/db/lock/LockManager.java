@@ -49,8 +49,7 @@ public class LockManager {
 	 *             if the record is locked with a <i>cookie</i> other than the
 	 *             supplied <i>cookie</i>
 	 */
-	public void unlock(final int recordNo, final long cookie)
-			throws SecurityException {
+	public void unlock(final int recordNo, final long cookie) throws SecurityException {
 		final LockInformation lockRecord = this.getLockRecord(recordNo);
 		lockRecord.unlock(cookie);
 	}
@@ -69,11 +68,9 @@ public class LockManager {
 	 *             if the record is locked with a <i>cookie</i> other than the
 	 *             supplied <i>cookie</i>
 	 */
-	public void checkCookie(final int recordNo, final long cookie)
-			throws SecurityException {
+	public void checkCookie(final int recordNo, final long cookie) throws SecurityException {
 		LockInformation lockRecord = new LockInformation();
-		lockRecord = LockManager.lockRecordMap
-				.putIfAbsent(recordNo, lockRecord);
+		lockRecord = LockManager.lockRecordMap.putIfAbsent(recordNo, lockRecord);
 		if (lockRecord.getCookie() != cookie) {
 			throw new SecurityException("Invalid cookie value");
 		}

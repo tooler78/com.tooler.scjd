@@ -41,8 +41,8 @@ public interface DB {
 	 * @throws SecurityException
 	 *             if the record is locked with a cookie other than lockCookie.
 	 */
-	public void update(int recNo, String[] data, long lockCookie)
-			throws RecordNotFoundException, SecurityException;
+	public void update(int recNo, String[] data, long lockCookie) throws RecordNotFoundException,
+			SecurityException;
 
 	/**
 	 * Deletes a record, making the record number and associated disk storage
@@ -59,8 +59,8 @@ public interface DB {
 	 * @throws SecurityException
 	 *             if the record is locked with a cookie other than lockCookie
 	 */
-	public void delete(int recNo, long lockCookie)
-			throws RecordNotFoundException, SecurityException;
+	public void delete(int recNo, long lockCookie) throws RecordNotFoundException,
+			SecurityException;
 
 	/**
 	 * Returns an array of record numbers that match the specified criteria.
@@ -117,7 +117,6 @@ public interface DB {
 	 * @throws SecurityException
 	 *             if the record is locked with a cookie other than cookie.
 	 */
-	public void unlock(int recNo, long cookie) throws RecordNotFoundException,
-			SecurityException;
+	public void unlock(int recNo, long cookie) throws RecordNotFoundException, SecurityException;
 
 }

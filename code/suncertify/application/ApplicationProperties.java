@@ -47,8 +47,7 @@ public class ApplicationProperties {
 
 	private Properties configProperties = null;
 
-	private static final File optionsFile = new File(
-			ApplicationProperties.BASE_DIRECTORY,
+	private static final File optionsFile = new File(ApplicationProperties.BASE_DIRECTORY,
 			ApplicationProperties.PROPERTY_FILE);
 
 	/**
@@ -78,8 +77,7 @@ public class ApplicationProperties {
 
 	private void createDefaultProperties() {
 		this.configProperties = new Properties();
-		this.configProperties.setProperty(ApplicationProperties.SERVER_ADDRESS,
-				"localhost");
+		this.configProperties.setProperty(ApplicationProperties.SERVER_ADDRESS, "localhost");
 		this.configProperties.setProperty(ApplicationProperties.SERVER_PORT, ""
 				+ Registry.REGISTRY_PORT);
 	}
@@ -97,8 +95,7 @@ public class ApplicationProperties {
 					loadedProperties.load(fileInputStream);
 					fileInputStream.close();
 				} catch (final FileNotFoundException fileNotFoundException) {
-					LaunchApplication
-							.showError("File not found. Default values will be used.");
+					LaunchApplication.showError("File not found. Default values will be used.");
 				} catch (final IOException ioException) {
 					LaunchApplication
 							.showError("Bad data in parameters file. Default values will be used.");
@@ -115,8 +112,7 @@ public class ApplicationProperties {
 	 * @return the database location property value
 	 */
 	public String getDatabaseLocation() {
-		return this.configProperties
-				.getProperty(ApplicationProperties.DATABASE_LOCATION);
+		return this.configProperties.getProperty(ApplicationProperties.DATABASE_LOCATION);
 	}
 
 	/**
@@ -126,8 +122,7 @@ public class ApplicationProperties {
 	 *            new database location value.
 	 */
 	public void setDatabaseLocation(final String databaseLocation) {
-		this.setProperty(ApplicationProperties.DATABASE_LOCATION,
-				databaseLocation);
+		this.setProperty(ApplicationProperties.DATABASE_LOCATION, databaseLocation);
 	}
 
 	/**
@@ -136,8 +131,7 @@ public class ApplicationProperties {
 	 * @return the server address property value
 	 */
 	public String getServerAddress() {
-		return this.configProperties
-				.getProperty(ApplicationProperties.SERVER_ADDRESS);
+		return this.configProperties.getProperty(ApplicationProperties.SERVER_ADDRESS);
 	}
 
 	/**
@@ -156,8 +150,7 @@ public class ApplicationProperties {
 	 * @return server port property value.
 	 */
 	public String getServerPort() {
-		return this.configProperties
-				.getProperty(ApplicationProperties.SERVER_PORT);
+		return this.configProperties.getProperty(ApplicationProperties.SERVER_PORT);
 	}
 
 	/**
@@ -180,14 +173,12 @@ public class ApplicationProperties {
 			synchronized (ApplicationProperties.optionsFile) {
 				final FileOutputStream fileOutputStream = new FileOutputStream(
 						ApplicationProperties.optionsFile);
-				this.configProperties
-						.store(fileOutputStream,
-								"Bodgitt and Scarper, LLC Application Configuration Properties");
+				this.configProperties.store(fileOutputStream,
+						"Bodgitt and Scarper, LLC Application Configuration Properties");
 				fileOutputStream.close();
 			}
 		} catch (final IOException ioException) {
-			LaunchApplication
-					.showError("Unable to save user parameters to file. ");
+			LaunchApplication.showError("Unable to save user parameters to file. ");
 		}
 	}
 

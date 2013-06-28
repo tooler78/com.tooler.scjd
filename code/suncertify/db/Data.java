@@ -56,8 +56,7 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public synchronized void initialize(final String databaseLocation)
-			throws DatabaseException {
+	public synchronized void initialize(final String databaseLocation) throws DatabaseException {
 		this.fileAccess = new FileAccess(databaseLocation);
 		this.cache.putAll(this.fileAccess.getAllRecords());
 		this.lockManager = new LockManager();
@@ -72,8 +71,7 @@ public class Data implements DBOperations {
 				this.fileAccess.saveAllRecords(this.cache);
 			}
 		} catch (final IOException ioException) {
-			throw new DatabaseException(
-					"Error while saving records into the database file.");
+			throw new DatabaseException("Error while saving records into the database file.");
 		} finally {
 			this.fileAccess = null;
 			this.lockManager = null;
@@ -99,9 +97,8 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(final int recNo, final String[] data,
-			final long lockCookie) throws RecordNotFoundException,
-			SecurityException {
+	public void update(final int recNo, final String[] data, final long lockCookie)
+			throws RecordNotFoundException, SecurityException {
 		if (this.isInitialized()) {
 			this.lockManager.checkCookie(recNo, lockCookie);
 			if (this.cache.containsKey(recNo)) {
@@ -116,8 +113,8 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public void delete(final int recNo, final long lockCookie)
-			throws RecordNotFoundException, SecurityException {
+	public void delete(final int recNo, final long lockCookie) throws RecordNotFoundException,
+			SecurityException {
 		if (this.isInitialized()) {
 			this.lockManager.checkCookie(recNo, lockCookie);
 			if (this.cache.containsKey(recNo)) {
@@ -135,13 +132,11 @@ public class Data implements DBOperations {
 	public int[] find(final String[] criteria) {
 		if (this.isInitialized()) {
 			final List<Integer> matchFound = new ArrayList<Integer>();
-			if (criteria != null
-					&& criteria.length == DatabaseSchema.FIELD_COUNT) {
+			if (criteria != null && criteria.length == DatabaseSchema.FIELD_COUNT) {
 				for (final Integer key : this.cache.keySet()) {
 					final Subcontractor contractor = this.cache.get(key);
 					if (contractor.getState() != RecordState.deleted) {
-						if (this.isMatchingSubcontractor(contractor.getData(),
-								criteria)) {
+						if (this.isMatchingSubcontractor(contractor.getData(), criteria)) {
 							matchFound.add(key);
 						}
 					}
@@ -157,8 +152,7 @@ public class Data implements DBOperations {
 		}
 	}
 
-	private boolean isMatchingSubcontractor(final String[] data,
-			final String[] query) {
+	private boolean isMatchingSubcontractor(final String[] data, final String[] query) {
 		boolean criteriaMatch = true;
 		for (int i = 0; i < query.length; i++) {
 			final String attribute = query[i];
@@ -194,8 +188,7 @@ public class Data implements DBOperations {
 				// cache size to calculate a record number.
 				availRecordNo = this.cache.size() + 1;
 			}
-			final Subcontractor contractor = new Subcontractor(
-					RecordState.valid, data);
+			final Subcontractor contractor = new Subcontractor(RecordState.valid, data);
 			this.cache.put(availRecordNo, contractor);
 
 			return availRecordNo;
@@ -213,8 +206,7 @@ public class Data implements DBOperations {
 				// Record number does not exist so we need to unlock the record
 				// and then throw the RecordNotFoundException
 				this.lockManager.unlock(recNo, cookie);
-				throw new RecordNotFoundException("Record with number " + recNo
-						+ " does not exist");
+				throw new RecordNotFoundException("Record with number " + recNo + " does not exist");
 			}
 
 			return cookie;
@@ -225,8 +217,8 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public void unlock(final int recNo, final long cookie)
-			throws RecordNotFoundException, SecurityException {
+	public void unlock(final int recNo, final long cookie) throws RecordNotFoundException,
+			SecurityException {
 		if (this.isInitialized()) {
 			this.lockManager.unlock(recNo, cookie);
 		} else {

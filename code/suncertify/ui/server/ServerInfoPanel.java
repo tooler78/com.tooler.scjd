@@ -69,14 +69,14 @@ public class ServerInfoPanel extends JPanel {
 	}
 
 	private void setHeadingText(final String headingText) {
-		final String htmlFormattedHeading = ServerInfoPanel.HTML_HEADING_START_TAG
-				+ headingText + ServerInfoPanel.HTML_HEADING_END_TAG;
+		final String htmlFormattedHeading = ServerInfoPanel.HTML_HEADING_START_TAG + headingText
+				+ ServerInfoPanel.HTML_HEADING_END_TAG;
 		this.headingTextLabel.setText(htmlFormattedHeading);
 	}
 
 	private void setInfoText(final String infoText) {
-		final String htmlFormattedInfo = ServerInfoPanel.HTML_INFO_START_TAG
-				+ infoText + ServerInfoPanel.HTML_INFO_END_TAG;
+		final String htmlFormattedInfo = ServerInfoPanel.HTML_INFO_START_TAG + infoText
+				+ ServerInfoPanel.HTML_INFO_END_TAG;
 		this.infoTextLabel.setText(htmlFormattedInfo);
 	}
 }

@@ -25,8 +25,7 @@ interface DBOperations extends DB {
 	 * @throws DatabaseException
 	 *             the invalid database exception
 	 */
-	public void initialize(final String databaseLocation)
-			throws DatabaseException;
+	public void initialize(final String databaseLocation) throws DatabaseException;
 
 	/**
 	 * Destroy the data access component so that any resources are released or
@@ -34,8 +33,8 @@ interface DBOperations extends DB {
 	 * interface.
 	 * <p>
 	 * On invocation of this method, the implementation class will require it's
-	 * {@link DBOperations#initialize(String)} method to be called before and request
-	 * of <i>CRUD</i> operations is allowed
+	 * {@link DBOperations#initialize(String)} method to be called before and
+	 * request of <i>CRUD</i> operations is allowed
 	 * 
 	 * @throws DatabaseException
 	 *             the invalid database exception

@@ -14,8 +14,7 @@ import java.awt.event.KeyEvent;
 public enum UICommand {
 
 	/** Command to book a {@code Subcontractor} for a customer. */
-	BOOK("Book", "Book the Subcontractor for the specified customer ID",
-			KeyEvent.VK_O),
+	BOOK("Book", "Book the Subcontractor for the specified customer ID", KeyEvent.VK_O),
 	/** Command to browse for a file location. */
 	BROWSE("Browse...", "Browse the file system", KeyEvent.VK_B),
 	/** Command to clear the user text entry from a component. */
@@ -27,8 +26,7 @@ public enum UICommand {
 	/** Command to exit the application. */
 	EXIT("Exit", "Exit the application", KeyEvent.VK_X),
 	/** Command to search the database. */
-	SEARCH("Search", "Search the database for criteria specified",
-			KeyEvent.VK_S),
+	SEARCH("Search", "Search the database for criteria specified", KeyEvent.VK_S),
 	/** Command to start the application. */
 	START("Start", "Start the application", KeyEvent.VK_T);
 
@@ -47,8 +45,7 @@ public enum UICommand {
 	 * @param keyEvent
 	 *            integer value for the key event represented by this command
 	 */
-	UICommand(final String actionCommand, final String actionCmdToolTip,
-			final int keyEvent) {
+	UICommand(final String actionCommand, final String actionCmdToolTip, final int keyEvent) {
 		this.actionCommand = actionCommand;
 		this.actionCmdToolTip = actionCmdToolTip;
 		this.keyEvent = keyEvent;

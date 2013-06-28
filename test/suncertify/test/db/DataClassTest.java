@@ -13,8 +13,8 @@ public class DataClassTest {
 	public void startTests() {
 		try {
 
-			Data.getInstance().initialize(
-					ApplicationProperties.getInstance().getDatabaseLocation());
+			Data.getInstance()
+					.initialize(ApplicationProperties.getInstance().getDatabaseLocation());
 			/*
 			 * Practically, it is not necessary to execute this loop more than 1
 			 * time, but if you want, you can increase the controller variable,
@@ -48,14 +48,12 @@ public class DataClassTest {
 			dataEntry[3] = "10";
 			dataEntry[4] = "$100.00";
 			dataEntry[5] = "12345678";
-			final Subcontractor subContractor = new Subcontractor(
-					RecordState.valid, dataEntry);
+			final Subcontractor subContractor = new Subcontractor(RecordState.valid, dataEntry);
 			final int recNo = (int) (Math.random() * 50);
 
 			try {
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to lock record #" + recNo
-						+ " on UpdatingRandomRecordThread");
+				System.out.println(Thread.currentThread().getId() + " trying to lock record #"
+						+ recNo + " on UpdatingRandomRecordThread");
 
 				/*
 				 * The generated record number may not exist in the database, so
@@ -69,9 +67,8 @@ public class DataClassTest {
 				 * your reality
 				 */
 				final long cookie = Data.getInstance().lock(recNo);
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to update record #" + recNo
-						+ " on UpdatingRandomRecordThread");
+				System.out.println(Thread.currentThread().getId() + " trying to update record #"
+						+ recNo + " on UpdatingRandomRecordThread");
 
 				/*
 				 * An exception cannot occur here, otherwise, the unlock
@@ -83,11 +80,9 @@ public class DataClassTest {
 				 * data.update(recNo, new String[] {"Palace", "Smallville", "2",
 				 * "Y", "$150.00", "2005/07/27", null});
 				 */
-				Data.getInstance().update(recNo, subContractor.getData(),
-						cookie);
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to unlock record #" + recNo
-						+ " on UpdatingRandomRecordThread");
+				Data.getInstance().update(recNo, subContractor.getData(), cookie);
+				System.out.println(Thread.currentThread().getId() + " trying to unlock record #"
+						+ recNo + " on UpdatingRandomRecordThread");
 				Data.getInstance().unlock(recNo, cookie);
 			} catch (final Exception e) {
 				System.out.println(e);
@@ -106,21 +101,17 @@ public class DataClassTest {
 			dataEntry[3] = "24";
 			dataEntry[4] = "$80.99";
 			dataEntry[5] = "12345678";
-			final Subcontractor subContractor = new Subcontractor(
-					RecordState.valid, dataEntry);
+			final Subcontractor subContractor = new Subcontractor(RecordState.valid, dataEntry);
 
 			try {
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to lock record #1 on"
+				System.out.println(Thread.currentThread().getId() + " trying to lock record #1 on"
 						+ " UpdatingRecord1Thread");
 				final long cookie = Data.getInstance().lock(1);
 				System.out.println(Thread.currentThread().getId()
-						+ " trying to update record #1 on"
-						+ " UpdatingRecord1Thread");
+						+ " trying to update record #1 on" + " UpdatingRecord1Thread");
 				Data.getInstance().update(1, subContractor.getData(), cookie);
 				System.out.println(Thread.currentThread().getId()
-						+ " trying to unlock record #1 on"
-						+ "UpdatingRecord1Thread");
+						+ " trying to unlock record #1 on" + "UpdatingRecord1Thread");
 
 				/*
 				 * In order to see the deadlock, this instruction can be
@@ -145,12 +136,10 @@ public class DataClassTest {
 			dataEntry[3] = "44";
 			dataEntry[4] = "$1.00";
 			dataEntry[5] = "12345678";
-			final Subcontractor subContractor = new Subcontractor(
-					RecordState.valid, dataEntry);
+			final Subcontractor subContractor = new Subcontractor(RecordState.valid, dataEntry);
 
 			try {
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to create a record");
+				System.out.println(Thread.currentThread().getId() + " trying to create a record");
 				Data.getInstance().create(subContractor.getData());
 			} catch (final Exception e) {
 				System.out.println(e);
@@ -163,17 +152,14 @@ public class DataClassTest {
 		@Override
 		public void run() {
 			try {
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to lock record #1 on "
+				System.out.println(Thread.currentThread().getId() + " trying to lock record #1 on "
 						+ "DeletingRecord1Thread");
 				final long cookie = Data.getInstance().lock(1);
 				System.out.println(Thread.currentThread().getId()
-						+ " trying to delete record #1 on "
-						+ "DeletingRecord1Thread");
+						+ " trying to delete record #1 on " + "DeletingRecord1Thread");
 				Data.getInstance().delete(1, cookie);
 				System.out.println(Thread.currentThread().getId()
-						+ " trying to unlock record #1 on "
-						+ "DeletingRecord1Thread");
+						+ " trying to unlock record #1 on " + "DeletingRecord1Thread");
 				Data.getInstance().unlock(1, cookie);
 			} catch (final Exception e) {
 				System.out.println(e);
@@ -186,10 +172,8 @@ public class DataClassTest {
 		@Override
 		public void run() {
 			try {
-				System.out.println(Thread.currentThread().getId()
-						+ " trying to find records");
-				final String[] criteria = { "Tooler Inc", "Athlone", null,
-						null, null, null };
+				System.out.println(Thread.currentThread().getId() + " trying to find records");
+				final String[] criteria = { "Tooler Inc", "Athlone", null, null, null, null };
 				final int[] results = Data.getInstance().find(criteria);
 
 				for (int i = 0; i < results.length; i++) {
@@ -197,16 +181,12 @@ public class DataClassTest {
 					try {
 						final String message = Thread.currentThread().getId()
 								+ " going to read record #" + results[i]
-								+ " in FindingRecordsThread - still "
-								+ (results.length - 1 - i) + " to go.";
+								+ " in FindingRecordsThread - still " + (results.length - 1 - i)
+								+ " to go.";
 						System.out.println(message);
-						final String[] room = Data.getInstance().read(
-								results[i]);
-						System.out
-								.println("Subcontractor (FindingRecordsThread): "
-										+ room[0]);
-						System.out.println("Has next? "
-								+ (i < results.length - 1));
+						final String[] room = Data.getInstance().read(results[i]);
+						System.out.println("Subcontractor (FindingRecordsThread): " + room[0]);
+						System.out.println("Has next? " + (i < results.length - 1));
 					} catch (final Exception e) {
 						/*
 						 * In case a record was found during the execution of
@@ -214,8 +194,7 @@ public class DataClassTest {
 						 * the read instruction, a RecordNotFoundException will
 						 * occur, which would be normal then
 						 */
-						System.out.println("Exception in "
-								+ "FindingRecordsThread - " + e);
+						System.out.println("Exception in " + "FindingRecordsThread - " + e);
 					}
 				}
 				System.out.println("Exiting for loop");

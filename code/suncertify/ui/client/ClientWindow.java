@@ -41,8 +41,7 @@ import suncertify.ui.UICommand;
  * @version 1.0
  * @author Damien O'Toole
  */
-public class ClientWindow extends JFrame implements ActionListener, ClientView,
-		TableModelListener {
+public class ClientWindow extends JFrame implements ActionListener, ClientView, TableModelListener {
 
 	private static final long serialVersionUID = -1264495915446348184L;
 
@@ -83,8 +82,7 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 	 *            The controller translates the user's interactions with the
 	 *            view into actions that the {@code ClientModel} will perform
 	 */
-	public ClientWindow(final SubcontractorController controller,
-			final SubcontractorModel model) {
+	public ClientWindow(final SubcontractorController controller, final SubcontractorModel model) {
 		this.controller = controller;
 		this.model = model;
 		this.model.addTableModelListener(this);
@@ -110,13 +108,11 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 		this.getContentPane().add(tabbedPane, BorderLayout.NORTH);
 
 		this.subContractorTable.setToolTipText(ClientWindow.TABLE_TOOLTIP);
-		this.subContractorTable
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.subContractorTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		final JScrollPane scrollPane = new JScrollPane(this.subContractorTable);
 		scrollPane.setViewportBorder(null);
 		scrollPane.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createEmptyBorder(5, 5, 5, 5),
-				BorderFactory.createEtchedBorder()));
+				BorderFactory.createEmptyBorder(5, 5, 5, 5), BorderFactory.createEtchedBorder()));
 		this.add(scrollPane, BorderLayout.CENTER);
 
 		this.pack();
@@ -185,8 +181,7 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 			gridBag.setConstraints(nameLabel, constraints);
 			this.add(nameLabel);
 
-			ClientWindow.this.nameField
-					.setToolTipText(ClientWindow.NAME_TOOLTIP);
+			ClientWindow.this.nameField.setToolTipText(ClientWindow.NAME_TOOLTIP);
 			constraints.gridwidth = GridBagConstraints.RELATIVE;
 			gridBag.setConstraints(ClientWindow.this.nameField, constraints);
 			this.add(ClientWindow.this.nameField);
@@ -202,26 +197,22 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 			gridBag.setConstraints(locationLabel, constraints);
 			this.add(locationLabel);
 
-			ClientWindow.this.locationField
-					.setToolTipText(ClientWindow.LOCATION_TOOLTIP);
+			ClientWindow.this.locationField.setToolTipText(ClientWindow.LOCATION_TOOLTIP);
 			constraints.gridwidth = GridBagConstraints.RELATIVE;
 			constraints.anchor = GridBagConstraints.WEST;
 			gridBag.setConstraints(ClientWindow.this.locationField, constraints);
 			this.add(ClientWindow.this.locationField);
 
 			constraints.gridwidth = GridBagConstraints.REMAINDER;
-			gridBag.setConstraints(ClientWindow.this.displayAllButton,
-					constraints);
+			gridBag.setConstraints(ClientWindow.this.displayAllButton, constraints);
 			this.add(ClientWindow.this.displayAllButton);
 
-			ClientWindow.this.exactMatchCheckBox
-					.setText(ClientWindow.EXACT_MATCH_LABEL);
+			ClientWindow.this.exactMatchCheckBox.setText(ClientWindow.EXACT_MATCH_LABEL);
 			ClientWindow.this.exactMatchCheckBox.setSelected(true);
 			constraints.gridwidth = 0;
 			constraints.anchor = GridBagConstraints.CENTER;
 			constraints.fill = GridBagConstraints.NONE;
-			gridBag.setConstraints(ClientWindow.this.exactMatchCheckBox,
-					constraints);
+			gridBag.setConstraints(ClientWindow.this.exactMatchCheckBox, constraints);
 			this.add(ClientWindow.this.exactMatchCheckBox);
 		}
 	}
@@ -242,19 +233,16 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 			constraints.insets = new Insets(2, 2, 2, 2);
 			constraints.anchor = GridBagConstraints.LINE_START;
 
-			final JLabel customerIdLabel = new JLabel(
-					ClientWindow.CUSTOMER_ID_LABEL);
+			final JLabel customerIdLabel = new JLabel(ClientWindow.CUSTOMER_ID_LABEL);
 			constraints.gridwidth = 1;
 			constraints.anchor = GridBagConstraints.EAST;
 			layout.setConstraints(customerIdLabel, constraints);
 			this.add(customerIdLabel);
 
-			ClientWindow.this.customerIdField
-					.setToolTipText(ClientWindow.CUSTOMER_ID_TOOLTIP);
+			ClientWindow.this.customerIdField.setToolTipText(ClientWindow.CUSTOMER_ID_TOOLTIP);
 			constraints.gridwidth = GridBagConstraints.REMAINDER;
 			constraints.anchor = GridBagConstraints.WEST;
-			layout.setConstraints(ClientWindow.this.customerIdField,
-					constraints);
+			layout.setConstraints(ClientWindow.this.customerIdField, constraints);
 			this.add(ClientWindow.this.customerIdField);
 
 			final JPanel buttonPanel = new JPanel();
@@ -278,8 +266,7 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 			this.controller.bookSubcontractor(this.customerIdField.getText());
 		} else if (actionCommand.equals(this.clearButton.getActionCommand())) {
 			this.clearCustomerID();
-		} else if (actionCommand.equals(this.displayAllButton
-				.getActionCommand())) {
+		} else if (actionCommand.equals(this.displayAllButton.getActionCommand())) {
 			this.displayAll();
 		} else if (actionCommand.equals(this.searchButton.getActionCommand())) {
 			this.seach();
@@ -310,8 +297,7 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 		if (ClientWindow.EMPTY_STRING.equals(location)) {
 			location = null;
 		}
-		this.controller.searchSubcontractor(name, location,
-				this.exactMatchCheckBox.isSelected());
+		this.controller.searchSubcontractor(name, location, this.exactMatchCheckBox.isSelected());
 	}
 
 	/** {@inheritDoc} */
@@ -335,12 +321,10 @@ public class ClientWindow extends JFrame implements ActionListener, ClientView,
 	/** {@inheritDoc} */
 	@Override
 	public void tableChanged(final TableModelEvent tableModelEvent) {
-		this.subContractorTable.setModel((TableModel) tableModelEvent
-				.getSource());
+		this.subContractorTable.setModel((TableModel) tableModelEvent.getSource());
 		final int previousSelection = tableModelEvent.getColumn();
 		if (previousSelection != ClientWindow.INVALID_SELECTION) {
-			this.subContractorTable.setRowSelectionInterval(previousSelection,
-					previousSelection);
+			this.subContractorTable.setRowSelectionInterval(previousSelection, previousSelection);
 		}
 	}
 

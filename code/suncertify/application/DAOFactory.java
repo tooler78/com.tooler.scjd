@@ -55,8 +55,7 @@ public final class DAOFactory {
 
 	private static DB getLocalDBInstance() {
 		try {
-			Data.getInstance().initialize(
-					DAOFactory.applicationProperties.getDatabaseLocation());
+			Data.getInstance().initialize(DAOFactory.applicationProperties.getDatabaseLocation());
 		} catch (final DatabaseException databaseException) {
 			LaunchApplication.showErrorAndExit(databaseException.getMessage());
 		}
@@ -64,10 +63,8 @@ public final class DAOFactory {
 	}
 
 	private static DB getRemoteDBInstance() {
-		final String url = "rmi://"
-				+ DAOFactory.applicationProperties.getServerAddress() + ":"
-				+ DAOFactory.applicationProperties.getServerPort() + "/"
-				+ DBFactory.RMI_KEY;
+		final String url = "rmi://" + DAOFactory.applicationProperties.getServerAddress() + ":"
+				+ DAOFactory.applicationProperties.getServerPort() + "/" + DBFactory.RMI_KEY;
 		try {
 			final DBFactory factory = (DBFactory) Naming.lookup(url);
 			final DBRemote dbRemote = factory.createRemoteDB();

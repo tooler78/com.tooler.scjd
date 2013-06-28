@@ -35,8 +35,7 @@ public interface DBRemote extends Remote {
 	 * @throws RemoteException
 	 *             if a networking error has occurred
 	 */
-	public String[] read(int recNo) throws RecordNotFoundException,
-			RemoteException;
+	public String[] read(int recNo) throws RecordNotFoundException, RemoteException;
 
 	/**
 	 * Modifies the fields of a record. The new value for field n appears in
@@ -57,8 +56,8 @@ public interface DBRemote extends Remote {
 	 * @throws RemoteException
 	 *             if a networking error has occurred
 	 */
-	public void update(int recNo, String[] data, long lockCookie)
-			throws RecordNotFoundException, SecurityException, RemoteException;
+	public void update(int recNo, String[] data, long lockCookie) throws RecordNotFoundException,
+			SecurityException, RemoteException;
 
 	/**
 	 * Deletes a record, making the record number and associated disk storage
@@ -77,8 +76,8 @@ public interface DBRemote extends Remote {
 	 * @throws RemoteException
 	 *             if a networking error has occurred
 	 */
-	public void delete(int recNo, long lockCookie)
-			throws RecordNotFoundException, SecurityException, RemoteException;
+	public void delete(int recNo, long lockCookie) throws RecordNotFoundException,
+			SecurityException, RemoteException;
 
 	/**
 	 * Returns an array of record numbers that match the specified criteria.
@@ -107,8 +106,7 @@ public interface DBRemote extends Remote {
 	 * @throws RemoteException
 	 *             if a networking error has occurred
 	 */
-	public int create(String[] data) throws DuplicateKeyException,
-			RemoteException;
+	public int create(String[] data) throws DuplicateKeyException, RemoteException;
 
 	/**
 	 * Locks a record so that it can only be updated or deleted by this client.
@@ -144,6 +142,6 @@ public interface DBRemote extends Remote {
 	 * @throws RemoteException
 	 *             if a networking error has occurred
 	 */
-	public void unlock(int recNo, long cookie) throws RecordNotFoundException,
-			SecurityException, RemoteException;
+	public void unlock(int recNo, long cookie) throws RecordNotFoundException, SecurityException,
+			RemoteException;
 }

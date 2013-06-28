@@ -24,8 +24,7 @@ import suncertify.remote.DBFactory;
  */
 public class GracefulShutdownHook extends Thread {
 
-	private final ApplicationProperties applicationProperties = ApplicationProperties
-			.getInstance();
+	private final ApplicationProperties applicationProperties = ApplicationProperties.getInstance();
 
 	/**
 	 * Signals the components of this application to shut down and release any
@@ -55,8 +54,7 @@ public class GracefulShutdownHook extends Thread {
 	 * Disconnect the DB interface from the RMI registry.
 	 */
 	private void disconnectRmi() {
-		final int rmiPort = Integer.parseInt(this.applicationProperties
-				.getServerPort());
+		final int rmiPort = Integer.parseInt(this.applicationProperties.getServerPort());
 		try {
 			final Registry registry = LocateRegistry.getRegistry(rmiPort);
 			registry.unbind(DBFactory.RMI_KEY);

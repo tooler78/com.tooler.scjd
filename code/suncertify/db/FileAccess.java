@@ -46,15 +46,13 @@ class FileAccess {
 		this.validateDatabase(databaseLocation);
 	}
 
-	private void validateDatabase(final String databaseLocation)
-			throws DatabaseException {
+	private void validateDatabase(final String databaseLocation) throws DatabaseException {
 		int magicCookie = -1;
 		try {
 			FileAccess.database = new RandomAccessFile(databaseLocation, "rw");
 			magicCookie = FileAccess.database.readInt();
 		} catch (final IOException ioException) {
-			throw new DatabaseException(
-					"Error while accessing the database file.");
+			throw new DatabaseException("Error while accessing the database file.");
 		}
 		if (DatabaseSchema.EXPECTED_MAGIC_COOKIE_VALUE != magicCookie) {
 			throw new DatabaseException(
@@ -71,8 +69,7 @@ class FileAccess {
 	 * @throws IOException
 	 *             error while accessing the file
 	 */
-	public ConcurrentSkipListMap<Integer, Subcontractor> getAllRecords()
-			throws DatabaseException {
+	public ConcurrentSkipListMap<Integer, Subcontractor> getAllRecords() throws DatabaseException {
 		final ConcurrentSkipListMap<Integer, Subcontractor> result = new ConcurrentSkipListMap<Integer, Subcontractor>();
 		int recNo = 1;
 
@@ -84,8 +81,7 @@ class FileAccess {
 				recNo++;
 			}
 		} catch (final IOException ioException) {
-			throw new DatabaseException(
-					"Error while accessing the database file.");
+			throw new DatabaseException("Error while accessing the database file.");
 		} finally {
 			FileAccess.dbReadWriteLock.writeLock().unlock();
 		}
@@ -93,8 +89,7 @@ class FileAccess {
 		return result;
 	}
 
-	private Subcontractor readSingleEntry(final long filePosition)
-			throws IOException {
+	private Subcontractor readSingleEntry(final long filePosition) throws IOException {
 		final byte flagByte;
 		final byte[] input = new byte[DatabaseSchema.TOTAL_SCHEMA_LENGTH];
 		final String[] recordData = new String[DatabaseSchema.FIELD_COUNT];
@@ -108,8 +103,7 @@ class FileAccess {
 			private int offSet = 0;
 
 			String read(final int length) throws UnsupportedEncodingException {
-				final String string = new String(input, this.offSet, length,
-						FileAccess.ENCODING);
+				final String string = new String(input, this.offSet, length, FileAccess.ENCODING);
 				this.offSet += length;
 				return string.trim();
 			}
@@ -119,13 +113,12 @@ class FileAccess {
 		final int flag = this.convertByteToInt(flagByte);
 		recordData[0] = entryReader.read(DatabaseSchema.FIELD_LENGTH_NAME);
 		recordData[1] = entryReader.read(DatabaseSchema.FIELD_LENGTH_LOCATION);
-		recordData[2] = entryReader
-				.read(DatabaseSchema.FIELD_LENGTH_SPECIALTIES);
+		recordData[2] = entryReader.read(DatabaseSchema.FIELD_LENGTH_SPECIALTIES);
 		recordData[3] = entryReader.read(DatabaseSchema.FIELD_LENGTH_SIZE);
 		recordData[4] = entryReader.read(DatabaseSchema.FIELD_LENGTH_RATE);
 		recordData[5] = entryReader.read(DatabaseSchema.FIELD_LENGTH_OWNER);
-		final Subcontractor subContractor = new Subcontractor(
-				RecordState.forValue(flag), recordData);
+		final Subcontractor subContractor = new Subcontractor(RecordState.forValue(flag),
+				recordData);
 		return subContractor;
 	}
 
@@ -143,8 +136,7 @@ class FileAccess {
 	 * @throws IOException
 	 *             error while accessing the file
 	 */
-	public void saveAllRecords(
-			final ConcurrentSkipListMap<Integer, Subcontractor> cache)
+	public void saveAllRecords(final ConcurrentSkipListMap<Integer, Subcontractor> cache)
 			throws IOException {
 		FileAccess.dbReadWriteLock.writeLock().lock();
 		try {
@@ -159,12 +151,11 @@ class FileAccess {
 		}
 	}
 
-	private void writeSingleEntry(final long filePosition,
-			final Subcontractor contractor) throws IOException {
+	private void writeSingleEntry(final long filePosition, final Subcontractor contractor)
+			throws IOException {
 		synchronized (FileAccess.database) {
 			FileAccess.database.seek(filePosition);
-			final byte flagByte = this.convertIntToByte(contractor.getState()
-					.getCode());
+			final byte flagByte = this.convertIntToByte(contractor.getState().getCode());
 			FileAccess.database.writeByte(flagByte);
 
 			final String[] data = contractor.getData();

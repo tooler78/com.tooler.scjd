@@ -50,9 +50,9 @@ public interface SubcontractorModel {
 	 * @throws RecordAlreadyBookedException
 	 *             if the record is already booked
 	 */
-	public void bookSubcontractor(final Subcontractor subContractor,
-			final String customerID, final int currentRowSelection)
-			throws RecordNotFoundException, RecordAlreadyBookedException;
+	public void bookSubcontractor(final Subcontractor subContractor, final String customerID,
+			final int currentRowSelection) throws RecordNotFoundException,
+			RecordAlreadyBookedException;
 
 	/**
 	 * Returns the {@link Subcontractor} at the specified position.

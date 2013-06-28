@@ -69,10 +69,9 @@ public class DBService {
 	 *            exactly matched
 	 * @return all {@code Subcontractors} matching the criteria
 	 */
-	public List<Subcontractor> searchSubcontractor(final String name,
-			final String location, final boolean exactMatchRequired) {
-		final String[] searchCriteria = new String[] { name, location, null,
-				null, null, null };
+	public List<Subcontractor> searchSubcontractor(final String name, final String location,
+			final boolean exactMatchRequired) {
+		final String[] searchCriteria = new String[] { name, location, null, null, null, null };
 		final List<Subcontractor> result = new ArrayList<Subcontractor>();
 
 		try {
@@ -84,8 +83,8 @@ public class DBService {
 						recordData = this.dao.read(recordNumber);
 						// Can assume record is valid in the constructor as any
 						// deleted records will be filtered out
-						final Subcontractor subContractor = new Subcontractor(
-								recordNumber, recordData);
+						final Subcontractor subContractor = new Subcontractor(recordNumber,
+								recordData);
 						if (exactMatchRequired) {
 							if (this.isExactMatch(subContractor, name, location)) {
 								result.add(subContractor);
@@ -108,8 +107,8 @@ public class DBService {
 		return result;
 	}
 
-	private boolean isExactMatch(final Subcontractor subContractor,
-			final String name, final String location) {
+	private boolean isExactMatch(final Subcontractor subContractor, final String name,
+			final String location) {
 		boolean exactMatch = true;
 		if (name != null) {
 			exactMatch &= name.equals(subContractor.getName());
@@ -144,11 +143,9 @@ public class DBService {
 	 *             if no record with the given record number exists or if it is
 	 *             marked as deleted
 	 */
-	public List<Subcontractor> bookSubcontractor(
-			final Subcontractor subContractor,
+	public List<Subcontractor> bookSubcontractor(final Subcontractor subContractor,
 			final List<Subcontractor> subContractors, final String customerID)
-			throws RecordAlreadyBookedException, SecurityException,
-			RecordNotFoundException {
+			throws RecordAlreadyBookedException, SecurityException, RecordNotFoundException {
 		final int recordNumber = subContractor.getRecordNumber();
 		long lockCookie = -1;
 		boolean locked = false;
@@ -160,23 +157,19 @@ public class DBService {
 			locked = true;
 
 			final String[] data = this.dao.read(recordNumber);
-			final Subcontractor updatedSubcontractor = new Subcontractor(
-					recordNumber, data);
+			final Subcontractor updatedSubcontractor = new Subcontractor(recordNumber, data);
 
 			// If the Subcontractor was already booked by another user, update
 			// the current Subcontractors displayed to reflect this and report
 			// the error to the user.
 			if (updatedSubcontractor.isBooked()) {
-				this.updateCurrentSubcontractors(subContractors,
-						updatedSubcontractor);
+				this.updateCurrentSubcontractors(subContractors, updatedSubcontractor);
 				throw new RecordAlreadyBookedException();
 			}
 
 			updatedSubcontractor.setOwner(customerID);
-			this.dao.update(recordNumber, updatedSubcontractor.getData(),
-					lockCookie);
-			this.updateCurrentSubcontractors(subContractors,
-					updatedSubcontractor);
+			this.dao.update(recordNumber, updatedSubcontractor.getData(), lockCookie);
+			this.updateCurrentSubcontractors(subContractors, updatedSubcontractor);
 		} catch (final SecurityException canBeIgnored) {
 			// Can only occur if a mistake occurs with the cookie value
 			// logic handling. Can be ignored.
@@ -187,8 +180,7 @@ public class DBService {
 				try {
 					this.dao.unlock(recordNumber, lockCookie);
 				} catch (final SecurityException securityException) {
-					LaunchApplication
-							.showError("Unable to unlock the Subcontractor!");
+					LaunchApplication.showError("Unable to unlock the Subcontractor!");
 				} catch (final RecordNotFoundException canBeIgnored) {
 					// Can be ignored as we had the lock on the record we were
 					// updating so this type of exception should not occur.
@@ -211,8 +203,7 @@ public class DBService {
 	 * @param updatedSC
 	 *            the updated instance of a {@code Subcontractor}
 	 */
-	private void updateCurrentSubcontractors(
-			final List<Subcontractor> subContractors,
+	private void updateCurrentSubcontractors(final List<Subcontractor> subContractors,
 			final Subcontractor updatedSC) {
 		for (final Subcontractor currentSC : subContractors) {
 			if (updatedSC.getRecordNumber() == currentSC.getRecordNumber()) {
@@ -239,11 +230,9 @@ public class DBService {
 	 *            the communication exception experienced between network client
 	 *            and server.
 	 */
-	private void handleCommunicationException(
-			final CommunicationException communicationException) {
-		LaunchApplication
-				.showErrorAndExit("Communication issue encountered with remote server."
-						+ "\nClient may now be out of sync with server so must be exited.");
+	private void handleCommunicationException(final CommunicationException communicationException) {
+		LaunchApplication.showErrorAndExit("Communication issue encountered with remote server."
+				+ "\nClient may now be out of sync with server so must be exited.");
 	}
 
 }

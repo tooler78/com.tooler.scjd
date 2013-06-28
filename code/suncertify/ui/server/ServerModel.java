@@ -25,8 +25,7 @@ public class ServerModel implements ServerStateModel {
 
 	private final ArrayList<ServerStateListener> listeners = new ArrayList<ServerStateListener>();
 
-	private final ApplicationProperties applicationProperties = ApplicationProperties
-			.getInstance();
+	private final ApplicationProperties applicationProperties = ApplicationProperties.getInstance();
 
 	private static final String REGISTRY_START_ERROR = "Unable to start the RMI registry. Perhaps the port is already in use?";
 
@@ -65,13 +64,11 @@ public class ServerModel implements ServerStateModel {
 	}
 
 	private void initDBConnectionSuccessful() throws DatabaseException {
-		Data.getInstance().initialize(
-				this.applicationProperties.getDatabaseLocation());
+		Data.getInstance().initialize(this.applicationProperties.getDatabaseLocation());
 	}
 
 	private void registerDBinRmiSuccessful() throws RemoteException {
-		final int rmiPort = Integer.parseInt(this.applicationProperties
-				.getServerPort());
+		final int rmiPort = Integer.parseInt(this.applicationProperties.getServerPort());
 		final Registry registry = LocateRegistry.createRegistry(rmiPort);
 		registry.rebind(DBFactory.RMI_KEY, new DBFactoryProvider());
 	}
@@ -94,8 +91,7 @@ public class ServerModel implements ServerStateModel {
 
 	/** {@inheritDoc} */
 	@Override
-	public void notifyServerStateListeners(
-			final ServerStateNotification stateNotification) {
+	public void notifyServerStateListeners(final ServerStateNotification stateNotification) {
 		this.serverState = stateNotification.getServerState();
 		for (final ServerStateListener stateListener : this.listeners) {
 			stateListener.handleStateChange(stateNotification);

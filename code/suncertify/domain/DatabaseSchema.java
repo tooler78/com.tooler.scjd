@@ -103,10 +103,8 @@ public class DatabaseSchema {
 	/**
 	 * Expected field lengths.
 	 */
-	public static final int[] FIELD_LENGTHS = new int[] {
-			DatabaseSchema.FIELD_LENGTH_NAME,
-			DatabaseSchema.FIELD_LENGTH_LOCATION,
-			DatabaseSchema.FIELD_LENGTH_SPECIALTIES,
+	public static final int[] FIELD_LENGTHS = new int[] { DatabaseSchema.FIELD_LENGTH_NAME,
+			DatabaseSchema.FIELD_LENGTH_LOCATION, DatabaseSchema.FIELD_LENGTH_SPECIALTIES,
 			DatabaseSchema.FIELD_LENGTH_SIZE, DatabaseSchema.FIELD_LENGTH_RATE,
 			DatabaseSchema.FIELD_LENGTH_OWNER };
 
@@ -119,8 +117,7 @@ public class DatabaseSchema {
 
 		// Flag byte needs to be included along with the other fields to
 		// determine record length even though it is read separately.
-		TOTAL_FIELD_LENGTH = tempFieldLeghtTotal
-				+ DatabaseSchema.FIELD_LENGTH_STATE;
+		TOTAL_FIELD_LENGTH = tempFieldLeghtTotal + DatabaseSchema.FIELD_LENGTH_STATE;
 	}
 
 }

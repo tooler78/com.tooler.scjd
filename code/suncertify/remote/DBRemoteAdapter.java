@@ -38,33 +38,29 @@ public class DBRemoteAdapter implements DB {
 		try {
 			return this.dbRemote.read(recNo);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke read remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke read remotely", remoteException);
 		}
 	}
 
 	@Override
 	/** {@inheritDoc} */
-	public void update(final int recNo, final String[] data,
-			final long lockCookie) throws RecordNotFoundException,
-			SecurityException {
+	public void update(final int recNo, final String[] data, final long lockCookie)
+			throws RecordNotFoundException, SecurityException {
 		try {
 			this.dbRemote.update(recNo, data, lockCookie);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke update remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke update remotely", remoteException);
 		}
 	}
 
 	@Override
 	/** {@inheritDoc} */
-	public void delete(final int recNo, final long lockCookie)
-			throws RecordNotFoundException, SecurityException {
+	public void delete(final int recNo, final long lockCookie) throws RecordNotFoundException,
+			SecurityException {
 		try {
 			this.dbRemote.delete(recNo, lockCookie);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke delete remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke delete remotely", remoteException);
 		}
 	}
 
@@ -74,8 +70,7 @@ public class DBRemoteAdapter implements DB {
 		try {
 			return this.dbRemote.find(criteria);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke find remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke find remotely", remoteException);
 		}
 	}
 
@@ -85,8 +80,7 @@ public class DBRemoteAdapter implements DB {
 		try {
 			return this.dbRemote.create(data);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke create remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke create remotely", remoteException);
 		}
 	}
 
@@ -96,20 +90,18 @@ public class DBRemoteAdapter implements DB {
 		try {
 			return this.dbRemote.lock(recNo);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke lock remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke lock remotely", remoteException);
 		}
 	}
 
 	@Override
 	/** {@inheritDoc} */
-	public void unlock(final int recNo, final long cookie)
-			throws RecordNotFoundException, SecurityException {
+	public void unlock(final int recNo, final long cookie) throws RecordNotFoundException,
+			SecurityException {
 		try {
 			this.dbRemote.unlock(recNo, cookie);
 		} catch (final RemoteException remoteException) {
-			throw new CommunicationException("Cannot invoke unlock remotely",
-					remoteException);
+			throw new CommunicationException("Cannot invoke unlock remotely", remoteException);
 		}
 	}
 

@@ -39,8 +39,7 @@ public class CommunicationException extends RuntimeException {
 	 * @param cause
 	 *            the throwable exception that was encountered
 	 */
-	public CommunicationException(final String exceptionText,
-			final Throwable cause) {
+	public CommunicationException(final String exceptionText, final Throwable cause) {
 		super(exceptionText, cause);
 	}
 
