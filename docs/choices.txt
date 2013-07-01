@@ -1,18 +1,9 @@
-Marking:
-	General Considerations (80 points)
-	Documentation (50 points)
-	Object-Oriented Design (50 points)
-	GUI (70 points)
-	Locking (80 points)
-	Language Fluency (70 points)
-
----------------------------
+===========================
 1.	General
-1.1	Architecture
-1.2 Package Structure
-1.3 Application startup
-1.4 Shutdown hook
-1.5 Exception handling	
+1.1 Package Structure
+1.2 Application startup
+1.3 Shutdown hook
+1.4 Exception handling	
 
 2.	Documentation
 2.1	User Guide
@@ -27,11 +18,10 @@ Marking:
 4.	Locking
 
 5.	Network
-5.1	RMI 
----------------------------
-	
-1.	General
+===========================
 
+1.	General
+---------------------------
 As required, the DB interface has not been changed and is used exactly as was intended with the 
 assignment. However, it has been reformatted and its JavaDoc information has been completed to make 
 it easier to use and to be consistent with all other classes/interfaces produced in this application 
@@ -42,9 +32,9 @@ make the code clearer and more concise. As a choice I decided that all issues/er
 served to the user in a UI component (for example, an error message dialog). Although detailed 
 logging can be very helpful when an issue occurs, a user may not be aware of the logging file 
 without prior reading of a User Guide. This can lead to frustration with regard to "What am I doing 
-wrong" scenario. 
+wrong?" scenario. 
 
-1.2 Package Structure
+1.1 Package Structure
 
 The following package breakdown was used to organize classes of common functionality. These classes 
 and interfaces within each package are related in terms of the set of tasks they perform.
@@ -72,7 +62,7 @@ suncertify.ui.server
 	Provides all server specific GUI classes required for this application to operate as a server 
 	application.
 
-1.3 Application startup
+1.2 Application startup
 
 As required by the assignment, the application supports the following start options:
 
@@ -117,22 +107,23 @@ will always need an instance , I used eager initialization, which always creates
 
 Finally depending on the mode, a table representing the list of database records is displayed to the 
 user (if launched in either client mode) or details on startup success failure is displays to the 
-user. Both client and server will make use of the MVC pattern which i will detail in a later 
+user. Both client and server will make use of the MVC pattern which I will detail in a later 
 chapter.
 
-1.4 Shutdown hook
+1.3 Shutdown hook
 
-One of the first tasks after during execution of the main class LaunchApplication, is to register a 
-"Shutdown Hook". A shutdown hook is a class initialized and when the virtual machine begins its 
-shutdown sequence it will start any registered shutdown hooks (not in any particular order) and 
-let them run concurrently. My class GracefulShutdownHook is responsible for any tidy-up tasks that 
-must be executed on the exit of the application. In the case of a "server" or "standalone" started 
-application, then the data read up from the supported .db file now needs to be persisted back into 
-the .db file (this is because of the choice i made with regard to my Data class implementation, but 
-more on that in a later chapter). Also when the application mode is server then an attempt to unbind
-the registered RMI service exposed for client-server communication, will also be attempted at this 
-point. If for any reason that an error is experienced in RMI unbind task then the exception is 
-caught and silently ignored - this is because the server is about to be shutdown.
+One of the first tasks during execution of the main class LaunchApplication, is to register a 
+"Shutdown Hook". A shutdown hook is an initialized but unstarted thread and when the virtual machine 
+begins its shutdown sequence it will start any registered shutdown hooks (not in any particular 
+order) and let them run concurrently. My class GracefulShutdownHook is responsible for any tidy-up 
+tasks that must be executed on the exit of the application. In the case of a "server" or 
+"standalone" started application, then the data read up from the supported .db file now needs to be 
+persisted back into the .db file (this is because of the choice I made with regard to my Data class 
+implementation, but more on that in a later chapter). Also when the application mode is server then 
+an attempt to unbind the registered RMI service exposed for client-server communication, will also 
+be attempted at this point. If for any reason that an error is experienced in RMI unbind task then 
+the exception is caught and silently ignored - this is because the server is about to be shutdown 
+and the knock on effect of this type of error scenario is not important.
 
 However in the case of the task of persisting modified data records back out to the .db file, then 
 we need to alert the user to the issue encountered as this is a serious error.
@@ -140,7 +131,7 @@ we need to alert the user to the issue encountered as this is a serious error.
 In the case of the networked client launch mode no tidy up task is required currently. However if it 
 is required then this class should be updated in the future.
 
-1.5 Exception handling	
+1.4 Exception handling	
 
 The following are the checked exceptions currently handled in the Application:
 	CommunicationException
@@ -160,18 +151,19 @@ The following are the checked exceptions currently handled in the Application:
 	
 As was mentioned in the General chapter text above, I have elected to try and report all error's 
 encountered directly to the user via a GUI component (namely a JDialog). Taking into account the 
-possible choice of reporting errors encountered with more detail into a log, i felt that, as a user I 
+possible choice of reporting errors encountered with more detail into a log, I felt that, as a user I 
 would appreciate being able to see the error message in the current application interface I am 
 using.
 
-2.	Documentation
 
+2.	Documentation
+---------------------------
 The following chapters contain some small detail around the documentation, as required by the 
 original assignment specification received.
 
 2.1	User Guide
 
-For the user guide i decided to have the following chapter layout:
+For the user guide I decided to have the following chapter layout:
 	Starting the application
 	Configuration
 	Server mode
@@ -184,15 +176,15 @@ modes along with the different configuration parameters required. The following 
 the different modes that the application will behave in post configuration validation. GUI Overview 
 will detail the layout of the GUI now that it is launched along with more detail on the use cases 
 supported from the GUI (as required from the original assignment). The final chapter is a utility 
-chapter to help the user to quickly solve an issue reported by the GUI. The GUI messages displayed 
-when encountering an error should be clear however my idea was for each of the error messages that 
-are displayed through the GUI, a sub chapter in this section would help to explain totally what the 
-issue is and how to resolve it. 
+chapter to help the user to quickly solve any issue reported by the GUI. The GUI messages displayed 
+within the UI components, when encountering an error, should be clear - however my idea was for each
+of the error messages that are displayed through the GUI, a sub chapter in this section would help
+to explain in detail what the issue is and how to resolve it. 
 
 2.2	JavaDoc
 
 As required in the original assignment, javadoc style comments are present for all elements of any 
-public interface of each class. In the case where methods or variables are private, i have not used 
+public interface of each class. In the case where methods or variables are private, I have not used 
 any javadoc comments. Instead I have tried to clearly name them in such a way as that it is clear 
 what exactly each private method and/or variable are trying to represent. I chose this style of 
 javadoc approach as I believe it to be a way of keeping the classes simple in their design and 
@@ -203,19 +195,145 @@ allows for good readability.
 As required I have detailed, as best I can, what were the different decisions and design choices I 
 made throughout the project, whether it be coding or documentation.
 
-3.	GUI
 
+3.	GUI
+---------------------------
 3.1	Configuration Dialogs
 
-Speak about the abstract dialog usage and extension for the different modes.
+If launched as a networked client or standalone, a JOptionPane is used to request the user to either
+exit or proceed with the launch of the application. As part of the JOptionPsne displayed, the 
+abstract class UserEntryPanel is used to capture the configuration information required for start-up.
+This object oriented approach allows for loose coupling and future modification of required 
+information without any re-working of the calling class using the UserEntryPanel class. 
 
+When launched with server mode, a JFrame is used. The server performs in a different life-cycle than
+the networked client/standalone mode. In client mode, once the user has acknowledged the positive 
+action in the JOption Pane, the main GUI window is visible with a list of records from the .db file 
+displayed and ready for use. The JFrame used in the server mode will instead be broken into two 
+JPanels and two option buttons(start and exit). The two JPanels are a ServerInfoPanel class and the 
+afore motioned UserEntryPanel. With regard to the server mode launch, the JFrame will not be removed 
+but instead report current server status in the information panel (ServerInfoPanel).
+ 
 3.2	MVC pattern
 
-How MVC is used on both client and server...speak how it is coded to interfaces so is loosely 
-coupled in implementation.
-
+For both the server and client implementation I have used the MVC pattern. I chose the pattern as it 
+allows for separation of responsibility with regard to the graphical user interface. The areas of 
+the MVC pattern breakdown into the following three units:
+	Model		- Holds all the state and application logic and sends notifications of state change.
+	View		- Gives a presentation of the current state of the model. 
+	Controller	- Takes the user input via the View and invokes and decides to invoked a change on 
+				  the model.
+In the case of both server and client I have created interfaces to represent the different models, 
+views and controllers. On the client side the following interfaces exist:
+	suncertify.ui.client.ClientView
+	suncertify.ui.client.SubcontractorModel
+	suncertify.ui.client.SubcontractorController
+In the case of the model and the view they are both specific to the object the client side UI will 
+work with, therefore I am using the word "Subcontractor" in both these interface names so it is 
+clear to the reader what the principle of these interfaces are. However for the view, there was 
+nothing specific required in the interface so I have decided to use a generic interface name 
+(ClientView). The implementation class names are as follows:
+	suncertify.ui.client.ClientWindow
+	suncertify.ui.client.ClientModel
+	suncertify.ui.client.ClientController
+To allow for strong knowledge transfer for the user I have used the same type of naming convention 
+with regard to the interfaces and implementation classes on the UI server side also (only difference 
+is as opposed to "Subcontractor", I am modeling a "server state"):
+	Interfaces
+		suncertify.ui.server.ServerView
+		suncertify.ui.server.ServerStateModel
+		suncertify.ui.server.ServerStateController
+	Implementation classes
+		suncertify.ui.server.ServerWindow
+		suncertify.ui.server.ServerModel
+		suncertify.ui.server.ServerController
+I regard the benefit of using the MVC pattern is to allow for easy changing of the presentation tier
+with no impact on the other portions of the system - for example currently the presentation is a 
+JFrame - but this could easily be changed to some other type of presentation with no ill effect on 
+any other portion of the system as long as the new presentation allows the user the ability to 
+interact with the model as was previously defined in the controller and model interfaces. Although 
+the MVC pattern does require quite a bit of design time and can be considered too costly for a 
+simple system, I believe it to be generally a good pattern to use as it allows for future 
+improvements/changes to be easily facilitated and limited to the specific portion of the system 
+subject to change.		
+		
 3.3	Business Service
 
-Speak about how the Business Service is on the client side as such...how he interacts with the 
-DB interface and hides complexity behind simple methods which are use case driven.
+I decided to use the supplied DB interface as my means of invoking the client-server requests. I 
+used the Adapter pattern to allow for invocation of methods on the DB interface. I needed an adapter 
+as the existing method API in the DB interface did not support remote invocation. Client can request
+a DB instance to operate its use cases on via the suncertify.application.DAOFactory. This class will 
+hand back a DB instance to the networked or standalone client (depending on the launch mode). This 
+DAO (data access object) contains all the possible methods to allow for CRUD (Create, Read, Update, 
+Delete) use cases to be executable. However to allow for safe interaction with the data layer, 
+certain method ordering is required to guarantee successful use case execution. With this in mind I 
+decided to use a service layer for all client model interaction and hide the DAO object below this 
+service layer. Benefit of this approach is that the client model will operate on the 
+suncertify.application.DBService who has a simple easy to understand API like for example 
+bookSubcontractor. However inside the DBService implementation, the DAO (DB instance) will allow for 
+locking, reading, updating and then finally unlocking the record, thus hiding the complex logic from 
+the client model.
 
+
+4.	Locking
+---------------------------
+
+To support the CRUD (Create, Read, Update, Delete) use cases of the DB interface, while allowing for
+concurrent modifications, a locking mechanism is required. I have separated out this locking from 
+the data class implementation as I felt this was a separate responsibility to what the Data class 
+would be tasked with. the suncertify.db.lock package contains two classes to handle the locking 
+within this application:
+	LockManager
+		- Supports requests to lock a given record number. returns a cookie to the calling class if 
+		  successful.
+		- Supports requests to unlock a given record number if the cookie value from the calling 
+		  class matches that of the locked record number.
+		- Supports requests to check the validity of a cookie vale for a given record number.
+	LockInformation
+		- Class to contain a unique cookie value and the current state (i.e. locked/unlocked)
+		- Supports requests to set locked, returning a cookie value.
+		- Supports requests to set unlocked if the given cookie value is as expected.
+		- Supports requests to get the current cookie value.
+To ensure safe transaction handling, as can be seen from above class explanations, a "cookie" 
+value is used to ensure that the originator who requested to lock a record is the only one allowed 
+to perform the CRUD use cases on the record. Also, until the originator who locked the record, 
+releases the lock, then no other caller can access the record. The LockManager uses a 
+ConcurrentHashMap keyed on the record numbers and containing a LockInformation object. The 
+LockManager will request the LockInfomration object to lock. The LockInformation class uses a 
+ReentrantLock to control the concurrent requests that could be possible in the networked client 
+mode. If the lock is not held by any user currently, it is locked and a new cookie value is 
+generated and returned. If the lock is already held, the current user request waits on the Condition 
+variable until it is signaled that the lock is available. Now the current user request can be tried 
+again to get the lock, until it is successful. Currently the only CRUD use cases that require 
+exclusive access (locking) are update and delete.
+
+
+5.	Network
+---------------------------
+
+The application networking support is implemented via RMI.
+
+Reasons for using RMI over Sockets:
+	- Remote objects look and feel like local objects.
+	- The complexities of network-aware objects are hidden from the application.
+	- No need to design a protocol between the client and server.
+	- Method calls are type safe in RMI (caught at compile time).
+
+All classes required to support networking are in the suncertify.remote package. I used a RMI 
+Factory pattern as this allows for each calling instance (networked client via the DAOFactory class) 
+to have its own version of the DBRemote interface - thereby avoiding the issue of thread reuse. 
+
+The DBRemote interface is identical to the DB interface except that it supports remote invocation 
+(i.e. extends the java.rmi.Remote interface and all methods can throw a java.rmi.RemoteException). 
+The use of the AdapterPattern allows for the client to operate requests on the DB interface but 
+within the implementation to transform the DB API request to the matching API request in the 
+DBRemote interface. Use of this pattern allows for the client interaction to be unaware of whether 
+the request is on a remote or local instance of the data layer.
+
+With regard to this application I believe the benefits of RMI outweighed the benefits of Sockets. 
+Although Sockets can support large amounts of data sending without a lot of overhead, I feel that 
+RMI suited this application better. Data being sent will not be of a level that would warrant a 
+socket implementation. Also ease of interaction with the RMI objects felt like a cleaner design 
+approach.
+
+===========================
