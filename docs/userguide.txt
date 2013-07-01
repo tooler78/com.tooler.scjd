@@ -26,9 +26,10 @@ Table of Contents
 =================================================
 
 1. Starting the application
-The application can be started with either no or exactly one command-line argument that 
-specifies the application mode. The application is executed using a command of this exact 
-form: java -jar runme.jar <mode>
+-------------------------------------------------
+The application can be started with either no or exactly one command-line argument that specifies 
+the application mode. The application is executed using a command of this exact form: 
+	java -jar runme.jar <mode>
 There are 3 possible modes of execution:
 	-	java -jar runme.jar
 			Starts the application in client mode
@@ -39,140 +40,142 @@ There are 3 possible modes of execution:
 
 
 2. Configuration
-The application, irrespective of supplied mode of launch, will retrieve applicable 
-properties from a suncertify.properties file in the current working directory. If the file
-does not exist at time of application start (i.e. launch via command line), then the user 
-will be prompted to enter the required properties. Depending on mode of launch, different 
-properties are required:
+-------------------------------------------------
+The application, irrespective of supplied mode of launch, will retrieve applicable properties from a 
+file titled "suncertify.properties" in the current working directory. If the file does not exist at 
+time of application start (i.e. launch via command line), then the user will be prompted to enter 
+the required properties. Depending on mode of launch, different properties are required:
 	-	Client Mode
 			Server address and port
 	-	Server Mode
 			Absolute path of a database file and server port
 	-	Stand-alone Mode
 			Absolute path of a database file		
-At this point, the user may choose to terminate the application by pressing the "Exit" 
-button. When the user confirms the configuration, the parameters are validated. If 
-validation fails for any of the entered properties, an error message is  displayed and the 
-dialog to edit the parameters will remain for the user to correct and retry entry. If 
-validation succeeds, the properties are stored in the suncertify.properties file in the 
-current working directory. It is not possible to change  the configuration, after the 
-components (client/server/stand-alone) have been started. If configuration parameters need 
-to be changed, the application must be terminated and restarted. On subsequent launches 
-properties in the file will be loaded by default into the entry fields available on 
-startup of the application. The following sub-chapters go through the properties in more 
-detail for each of the launch modes.
+At this point, the user may choose to terminate the application by pressing the "Exit" button or 
+proceed with entering in the requested configuration information. When the user confirms the 
+configuration (i.e. pressing "Start" for example), the parameters are validated. If validation fails 
+for any of the entered properties, an error message is  displayed and the dialog to edit the 
+parameters will remain for the user to correct and retry entry. If validation succeeds, the 
+properties are stored in the file titled "suncertify.properties" in the current working directory. 
+It is not possible to change  the configuration, after the components (client/server/stand-alone) 
+have been started. If configuration parameters need to be changed, the application must be 
+terminated and restarted. On subsequent launches properties in the file will be loaded by default 
+into the entry fields available on startup of the application. The following sub-chapters go through 
+the properties in more detail for each of the launch modes.
 
 2.1 Configuration in Server mode
 In server mode, there are two configuration parameters:
 - Database location
-  	The absolute path and name of the data file to be used. The user can directly enter 
-  	the parameter value in the text field. As an alternative, by pressing the "Browse..." 
-  	button, a file chooser dialog opens that allows the user to select a data file. 	
+  	The absolute path and name of the data file to be used. The user can directly enter the 
+  	parameter value in the text field. As an alternative, by pressing the "Browse..." button, a file 
+  	chooser dialog opens that allows the user to select a data file. 	
 - Server Port
-  	The port on which the running server application will listen for client requests. The 
-  	user enters a number between 0-65535. The number has a suggested value of 1099 if the 
-  	configuration file does not exist.
+  	The port on which the running server application will listen for client requests. The user 
+  	enters a number between 0-65535. The number has a suggested value of 1099 if the configuration 
+  	file does not exist.
   	
 2.2 Configuration in Client mode
 In client mode, there are two configuration parameters:
 - Server Address
-  	The hostname that corresponds to an IP address where the application is currently 
-  	running in server mode. Alternatively the user can enter the IP address. The server 
-  	address has a suggested value of localhost if the configuration file does not exist.
+  	The hostname that corresponds to an IP address where the application is currently running in 
+  	server mode. Alternatively the user can enter the IP address. The server address has a suggested 
+  	value of localhost if the configuration file does not exist.
 - Server Port
-  	The port on which the running server application will listen for client requests. The 
-  	user enters a number between 0-65535. The number has a suggested value of 1099 if the 
-  	configuration file does not exist.
+  	The port on which the running server application will listen for client requests. The user 
+  	enters a number between 0-65535. The number has a suggested value of 1099 if the configuration 
+  	file does not exist.
 
 2.3 Configuration in Stand-alone mode
 In stand-alone mode, there is a single configuration parameter:
 - Database location
-  	The absolute path and name of the data file to be used. The user can directly enter 
-  	the parameter value in the text field. As an alternative, by pressing the "Browse..." 
-  	button, a file chooser dialog opens that allows the user to select a data file.
+  	The absolute path and name of the data file to be used. The user can directly enter the 
+  	parameter value in the text field. As an alternative, by pressing the "Browse..." button, a file 
+  	chooser dialog opens that allows the user to select a data file.
 
 
 3. Server mode
-The server is started by choosing the "Start" button. When the server was successfully
-started an information panel in the server GUI will display the message "Server 
-successfully started". All controls are now disabled in the Server GUI except for the 
-"Exit" button, which if the user wishes to terminate the running server at any point, can
-be selected. 
+-------------------------------------------------
+The server is started by choosing the "Start" button. When the server was successfully started an 
+information panel in the server GUI will display the message "Server successfully started". All 
+controls are now disabled in the Server GUI except for the "Exit" button, which if the user wishes 
+to terminate the running server at any point, can be selected. 
 
 
 4. Client and Stand-alone mode
-Once the initial configuration dialog (in either client or stand-alone mode) has been 
-completed, from the user's point of view, there is no difference in the way to invoke the 
-application's use cases. The Bodgitt and Scarper CSR Booking System GUI presented is 
-identical in both modes. The only difference is with regard to the actual operations being 
-invoked either locally (stand-alone mode) or remotely (client mode). 
+-------------------------------------------------
+Once the initial configuration dialog (in either client or stand-alone mode) has been completed, 
+from the user's point of view, there is no difference in the way to invoke the application's use 
+cases. The Bodgitt and Scarper CSR Booking System GUI presented is identical in both modes. The only 
+difference is with regard to the actual operations being invoked either locally (stand-alone mode) 
+or remotely (client mode). 
 
 4.1 GUI Overview
 The Bodgitt and Scarper CSR Booking System GUI layout is split into two distinct sections:
 - Tabbed Panes
-	There are two distinct tabs. The Search tab is to assist the user with finding 
-	matching Subcontractors for a specified name and/or location. The Book tab is for 
-	reserving a Subcontractor for a specified customer ID.
+	There are two distinct tabs. The Search tab is to assist the user with finding matching 
+	Subcontractors for a specified name and/or location. The Book tab is for reserving a 
+	Subcontractor for a specified customer ID.
 - Table
-	The remainder of the GUI displays a table showing the Subcontractors in the database. 
-	If a user has used the Search pane then the supplied search text will be used to 
-	filter the database and the table will now display the results of the search.
+	The remainder of the GUI displays a table showing the Subcontractors in the database. If a user 
+	has used the Search pane then the supplied search text will be used to filter the database and 
+	the table will now display the results of the search.
 
 4.2 Retrieving all Subcontractors
-To retrieve all records a "Display All" button is available on the Search pane. Also if no 
-text is supplied for the name and location field and the "Search" button is selected, then 
-all records will be retrieved. The result is presented in the table. 
+To retrieve all records a "Display All" button is available on the Search pane. Also if no text is 
+supplied for the name and location field and the "Search" button is selected, then all records will 
+be retrieved. The result is presented in the table. 
 
 4.3 Searching for Subcontractors
-When searching for a Subcontractor, a name and/or location can be used. Once the text is 
-entered the Search is invoked by selecting the "Search" button. The result of the search 
-operation is presented in the table. While the check box (to the left of the text 
-"Exactly match Name and/or Location specified") is ticked the search operation returns all 
-Subcontractors, where the specified search attributes exactly match the corresponding 
-fields (including capitalization). Alternatively if the check box is not ticked then whole 
-word text entry is not required (capitalization will be ignored also).
+When searching for a Subcontractor, a name and/or location can be used. Once the text is entered the 
+Search is invoked by selecting the "Search" button. The result of the search operation is presented 
+in the table. While the check box (to the left of the text "Exactly match Name and/or Location 
+specified") is ticked the search operation returns all Subcontractors, where the specified search 
+attributes exactly match the corresponding fields (including capitalization). Alternatively if the 
+check box is not ticked then whole word text entry is not required (capitalization will be ignored 
+also).
 
 4.4 Booking a Subcontractor
-The book tab allows the user to reserve a Subcontractor for a specified customer ID. To 
-book a Subcontractor simply select a Subcontractor from the table displayed and enter a 
-customer ID (8 digit number, for example 12345678) and select the "Book" button. To remove 
-previously entered text in the customer ID text field, select the "Clear" button.
+The book tab allows the user to reserve a Subcontractor for a specified customer ID. To book a 
+Subcontractor simply select a Subcontractor from the table displayed and enter a customer ID 
+(8 digit number, for example 12345678) and select the "Book" button. To remove previously entered 
+text in the customer ID text field, select the "Clear" button.
 
 5. Trouble-Shooting
-There are a number of error messages that may be displayed to the user based on either 
-incorrect entry from the user or mandatory entry not being supplied when operating the 
-different use cases in the GUI. The following sub chapters give a description of why these 
-error messages are displayed.
+-------------------------------------------------
+There are a number of error messages that may be displayed to the user based on either incorrect 
+entry from the user or mandatory entry not being supplied when operating the different use cases in 
+the GUI. The following sub chapters give a description of why these error messages are displayed.
 
 5.1 The database location entered is not a valid file
-An absolute path must be specified. The file must have a ".db" extension and must 
-physically exist in the exact location as specified by the user.
+An absolute path must be specified. The file must have a ".db" extension and must physically exist 
+in the exact location as specified by the user.
 
 5.2 Error in Port Number entry
 The port number entered must be a numeric value between 0 and 65535 inclusive.
 
 5.3 Server Address entered is not contactable
 The server address can either be a machine name (such as "java.sun.com"), or a textual 
-representation of its IP address. If a literal IP address is supplied, then it must be 
-entered in a valid format (such as 156.151.59.19).
+representation of its IP address. If a literal IP address is supplied, then it must be entered in a 
+valid format (such as 156.151.59.19).
 
 5.4 Please enter a valid Customer ID before attempting to book a Subcontractor
-Before attempting to book a Subcontractor, a valid customer ID must be supplied. It should 
-be in the format of an 8 digit number (such as 12345678).
+Before attempting to book a Subcontractor, a valid customer ID must be supplied. It should be in the 
+format of an 8 digit number (such as 12345678).
 
 5.5 There is currently no Subcontractor selected in the table
 When attempting to book a Subcontractor, a selection must be made in the table listing of 
 Subcontractors.
 
 5.6 The selected Subcontractor is already booked
-When attempting to book a Subcontractor who has already a valid customer ID in the "Owner" 
-field. Please note the presented list of Subcontractors in a
-specific client may not reflect the most up-to-date status for all Subcontractors, and 
-therefore when performing a booking task, what appears as an unreserved Subcontractor, 
-may have been reserved by another client.
+When attempting to book a Subcontractor who has already a valid customer ID in the "Owner" field. 
+Please note the presented list of Subcontractors in a specific client may not reflect the most 
+up-to-date status for all Subcontractors, and therefore when performing a booking task, what appears 
+as an unreserved Subcontractor, may have been reserved by another client.
 
 5.7 The selected Subcontractor information can not be found
-When attempting to book a Subcontractor who has already been deleted by another client. 
-Please note the presented list of Subcontractors in a specific client may not reflect the 
-most up-to-date status for all Subcontractors, and therefore when performing a booking 
-task, what appears as a valid Subcontractor, may have been deleted by another client.
+When attempting to book a Subcontractor who has already been deleted by another client. Please note 
+the presented list of Subcontractors in a specific client may not reflect the most up-to-date status 
+for all Subcontractors, and therefore when performing a booking task, what appears as a valid 
+Subcontractor, may have been deleted by another client.
+
+=================================================
