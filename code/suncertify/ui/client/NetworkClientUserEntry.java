@@ -1,8 +1,10 @@
 package suncertify.ui.client;
 
 import java.awt.GridBagConstraints;
-import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -79,13 +81,17 @@ public class NetworkClientUserEntry extends UserEntryPanel {
 	}
 
 	private boolean invalidServerAddress() {
+		boolean result = true;
 		try {
 			final String addressOrIp = this.serverAddressField.getText();
-			InetAddress.getByName(addressOrIp);
-			return false;
-		} catch (final IOException ioException) {
-			return true;
+			final InetAddress inetAddress = InetAddress.getByName(addressOrIp);
+			if (inetAddress instanceof Inet4Address || inetAddress instanceof Inet6Address) {
+				result = false;
+			}
+		} catch (final UnknownHostException unknownHostException) {
 		}
+
+		return result;
 	}
 
 	/** {@inheritDoc} */

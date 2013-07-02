@@ -14,10 +14,12 @@
 3.1	Configuration Dialogs
 3.2	MVC pattern
 3.3	Business Service
-	
-4.	Locking
 
-5.	Network
+4.	Data Implementation
+
+5.	Locking
+
+6.	Network
 ===========================
 
 1.	General
@@ -275,7 +277,14 @@ locking, reading, updating and then finally unlocking the record, thus hiding th
 the client model.
 
 
-4.	Locking
+4.	Data Implementation
+---------------------------
+Add text explaining the use of sync...
+use of init and destroy
+type of data structure used for record holding
+
+
+5.	Locking
 ---------------------------
 
 To support the CRUD (Create, Read, Update, Delete) use cases of the DB interface, while allowing for
@@ -308,7 +317,7 @@ again to get the lock, until it is successful. Currently the only CRUD use cases
 exclusive access (locking) are update and delete.
 
 
-5.	Network
+6.	Network
 ---------------------------
 
 The application networking support is implemented via RMI.
@@ -335,5 +344,14 @@ Although Sockets can support large amounts of data sending without a lot of over
 RMI suited this application better. Data being sent will not be of a level that would warrant a 
 socket implementation. Also ease of interaction with the RMI objects felt like a cleaner design 
 approach.
+
+With regard to the client server architecture, a best effort is made to validate the entered text 
+which represents the requested "Server Address" as part of the networked client launch. Text entered
+can be a hostname or a literal IP address. entry of either format will be validated to ensure a IPv4
+or IPv6 address is fully qualified. However the verification of the presence of an RMI Registry on 
+the validated IP address may take some time to complete. For the sake of assuming that data entry 
+will not be intentionally incorrect, I have decided not to introduce any further checking (i.e. 
+verification that the server address is contactable) so as to balance the performance of the 
+application on startup with the need to validate the user entry.
 
 ===========================
