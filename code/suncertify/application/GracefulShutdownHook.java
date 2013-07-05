@@ -50,9 +50,6 @@ public class GracefulShutdownHook extends Thread {
 		}
 	}
 
-	/**
-	 * Disconnect the DB interface from the RMI registry.
-	 */
 	private void disconnectRmi() {
 		final int rmiPort = Integer.parseInt(this.applicationProperties.getServerPort());
 		try {
@@ -66,10 +63,6 @@ public class GracefulShutdownHook extends Thread {
 		}
 	}
 
-	/**
-	 * Saves all records to the database file. It ensures that the cache being
-	 * used by our {@link Data} class is persisted back into the original file.
-	 */
 	private void saveAllDataToFile() {
 		try {
 			Data.getInstance().destroy();

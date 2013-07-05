@@ -33,17 +33,13 @@ public class ApplicationProperties {
 	/** The maximum allowed <i>Port</i> number entry. */
 	public static final int MAX_PORT_RANGE = 65535;
 
-	/** Name of the properties file used by this application. */
-	public static final String PROPERTY_FILE = "suncertify.properties";
+	private static final String PROPERTY_FILE = "suncertify.properties";
 
-	/** Key for the <i>database location</i> property. */
-	public static final String DATABASE_LOCATION = "databaseLocation";
+	private static final String DATABASE_LOCATION = "databaseLocation";
 
-	/** Key for the RMI Registry <i>server address</i> property. */
-	public static final String SERVER_ADDRESS = "ServerAddress";
+	private static final String SERVER_ADDRESS = "ServerAddress";
 
-	/** Key for the RMI Registry <i>server port</i> property. */
-	public static final String SERVER_PORT = "ServerPort";
+	private static final String SERVER_PORT = "ServerPort";
 
 	private Properties configProperties = null;
 
