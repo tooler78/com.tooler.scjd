@@ -46,18 +46,6 @@ public abstract class UserEntryPanel extends JPanel {
 	protected static final String DATABASE_CHOOSER_DESCRIPTION = "Database files (*."
 			+ ApplicationProperties.DATABASE_EXTENSION + ")";
 
-	/**
-	 * The Constant MIN_PORT_RANGE representing the minimum allowed <i>Port</i>
-	 * number entry.
-	 */
-	protected static final int MIN_PORT_RANGE = 0;
-
-	/**
-	 * The Constant MAX_PORT_RANGE representing the maximum allowed <i>Port</i>
-	 * number entry.
-	 */
-	protected static final int MAX_PORT_RANGE = 65535;
-
 	/** The {@link LaunchMode} that this running application was launched in. */
 	protected final LaunchMode launchMode = LaunchApplication.getLaunchMode();
 
@@ -106,7 +94,8 @@ public abstract class UserEntryPanel extends JPanel {
 		boolean result = true;
 		try {
 			final int port = Integer.parseInt(portNumber);
-			if (port >= UserEntryPanel.MIN_PORT_RANGE && port <= UserEntryPanel.MAX_PORT_RANGE) {
+			if (port >= ApplicationProperties.MIN_PORT_RANGE
+					&& port <= ApplicationProperties.MAX_PORT_RANGE) {
 				result = false;
 			}
 		} catch (final NumberFormatException e) {

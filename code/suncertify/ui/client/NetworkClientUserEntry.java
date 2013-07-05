@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import suncertify.application.ApplicationProperties;
 import suncertify.application.LaunchApplication;
 import suncertify.ui.UserEntryPanel;
 
@@ -74,7 +75,8 @@ public class NetworkClientUserEntry extends UserEntryPanel {
 		} else if (this.invalidPortNumber(this.portNumber.getText())) {
 			LaunchApplication.showError("Error in Port Number entry!"
 					+ "\nPort Number must be a numeric value between "
-					+ UserEntryPanel.MIN_PORT_RANGE + "-" + UserEntryPanel.MAX_PORT_RANGE);
+					+ ApplicationProperties.MIN_PORT_RANGE + "-"
+					+ ApplicationProperties.MAX_PORT_RANGE);
 			result = false;
 		}
 		return result;

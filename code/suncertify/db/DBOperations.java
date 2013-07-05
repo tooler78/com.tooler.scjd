@@ -33,8 +33,8 @@ interface DBOperations extends DB {
 	 * interface.
 	 * <p>
 	 * On invocation of this method, the implementation class will require it's
-	 * {@link DBOperations#init(String)} method to be called before any
-	 * request of <i>CRUD</i> operations is allowed.
+	 * {@link DBOperations#init(String)} method to be called before any request
+	 * of <i>CRUD</i> operations is allowed.
 	 * 
 	 * @throws DatabaseException
 	 *             the invalid database exception
