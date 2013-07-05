@@ -50,8 +50,8 @@ public class ServerModel implements ServerStateModel {
 		final ServerStateNotification stateNotification = new ServerStateNotification(
 				ServerState.STARTED);
 		try {
-			this.initDBConnectionSuccessful();
-			this.registerDBinRmiSuccessful();
+			this.initDBConnection();
+			this.registerDBinRMIRegistry();
 		} catch (final DatabaseException databaseException) {
 			stateNotification.setServerState(ServerState.FAILED);
 			stateNotification.setInfoMessage(databaseException.getMessage());
@@ -63,11 +63,11 @@ public class ServerModel implements ServerStateModel {
 		}
 	}
 
-	private void initDBConnectionSuccessful() throws DatabaseException {
-		Data.getInstance().initialize(this.applicationProperties.getDatabaseLocation());
+	private void initDBConnection() throws DatabaseException {
+		Data.getInstance().init(this.applicationProperties.getDatabaseLocation());
 	}
 
-	private void registerDBinRmiSuccessful() throws RemoteException {
+	private void registerDBinRMIRegistry() throws RemoteException {
 		final int rmiPort = Integer.parseInt(this.applicationProperties.getServerPort());
 		final Registry registry = LocateRegistry.createRegistry(rmiPort);
 		registry.rebind(DBFactory.RMI_KEY, new DBFactoryProvider());

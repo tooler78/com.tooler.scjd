@@ -55,7 +55,7 @@ public final class DAOFactory {
 
 	private static DB getLocalDBInstance() {
 		try {
-			Data.getInstance().initialize(DAOFactory.applicationProperties.getDatabaseLocation());
+			Data.getInstance().init(DAOFactory.applicationProperties.getDatabaseLocation());
 		} catch (final DatabaseException databaseException) {
 			LaunchApplication.showErrorAndExit(databaseException.getMessage());
 		}

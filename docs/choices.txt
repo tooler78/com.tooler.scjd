@@ -279,9 +279,52 @@ the client model.
 
 4.	Data Implementation
 ---------------------------
-Add text explaining the use of sync...
-use of init and destroy
-type of data structure used for record holding
+
+As required, the Data class provides implementation logic for the methods contained in the DB 
+interface as was intended with the assignment. However, I have decided to introduce a new interface, 
+DBOperations, to allow two extra methods which i felt would be useful for my desired implementation. 
+The DBOperations interface adds just two extra methods currently:
+	init (takes a parameter representing a .db file location)
+	destroy
+The "init" method is required to be performed before any CRUD methods supplied by the DB interface.
+The reason for this is that because I chose a singleton pattern for the Data class and therefore i 
+need to allow for the singleton class to have different states (i.e. initialized). The init method 
+takes a pre-verified .db file as an argument. The init method will perform the following actions:
+	1.	Instantiate a worker class called FileAccess which does all the access and manipulation of 
+	the physical file that is our database.Having all the code here, instead of in the Data class, 
+	that the single responsibility principle is much easier to maintain and a cleaner design.
+	2.	Requests the FileAccess class to get all records and store them in our cache data structure 
+	to be used for all CRUD requests.
+	3.	Instantiate an instance of LockManager which will be used to support safe access of multiple 
+	network client launched applications with regard to concurrent requests to our single instance 
+	of the server application.
+	4.	Set the Data class flag of initialized to true so that CRUD requests can be processed on 
+	request.
+The "destroy" method will reset the key elements of the Data class back to a pre initialized state.
+	1.	If the class had been previously initialized (i.e. FileAccess successfully initialized), 
+	then a request to flush the current cache out to the physical database file will be attempted.
+	2.	The field variable representing the FileAccess instance is set to null.
+	3.	The field variable representing the LockManager instance is set to null.
+	4.	The cache is reset to an empty data structure.
+	5.	Set the Data class flag of initialized to false so that CRUD requests will not  be processed 
+	on request.
+Both the "init" and "destory" methods are synchronized so as to protect the key use case of setting 
+up or tearing down the Data class without fear for any concurrent CRUD requests coming in and 
+resulting in corrupting the launched network clients making the CRUD request.
+No synchronization is being used for any of the methods from the DB interface. Instead, i will use a 
+ConcurrentSkipListMap keyed on the record, as read up from the database file, with a Subcontractor 
+object as the value object for the given record number key. I chose this type of data structure as 
+its a scalable concurrent map that is sorted according to the ordering of its keys (Insertion, 
+removal, update, and access operations safely execute concurrently by multiple threads). This was 
+useful for two reasons:
+	a)	I didn't want to have synchronized on the CRUD methods if possible. I have the LockManager 
+	to handle the concurrency of multiple network clients and synchronizing on the methods would 
+	only cause a second layer of handling multi-threaded requests.
+	b) ConcurrentSkipListMap support ordering. This is an important feature because the assignment 
+	specified the re-use of deleted records - Therefore the natural order of records read in and 
+	manipulated during the runtime of the server application needs to be maintained when writing 
+	back out to the database on request to "destroy".
+
 
 
 5.	Locking

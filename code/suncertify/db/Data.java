@@ -26,7 +26,7 @@ public class Data implements DBOperations {
 
 	private final AtomicBoolean initialized = new AtomicBoolean();
 
-	private static final String INITIALIZATION_ERROR_TEXT = "Data File Access has not been correctly initialized prior to this method call";
+	private static final String NON_INITIALIZATION_ERROR_TEXT = "Data File Access has not been correctly initialized prior to this method call";
 
 	private ConcurrentSkipListMap<Integer, Subcontractor> cache = new ConcurrentSkipListMap<Integer, Subcontractor>();
 
@@ -56,7 +56,7 @@ public class Data implements DBOperations {
 
 	/** {@inheritDoc} */
 	@Override
-	public synchronized void initialize(final String databaseLocation) throws DatabaseException {
+	public synchronized void init(final String databaseLocation) throws DatabaseException {
 		this.fileAccess = new FileAccess(databaseLocation);
 		this.cache.putAll(this.fileAccess.getAllRecords());
 		this.lockManager = new LockManager();
@@ -91,7 +91,7 @@ public class Data implements DBOperations {
 		if (this.isInitialized()) {
 			return this.cache.get(recNo).getData();
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class Data implements DBOperations {
 				this.cache.putIfAbsent(recNo, subContractor);
 			}
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class Data implements DBOperations {
 				this.cache.put(recNo, subContractor);
 			}
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -148,7 +148,7 @@ public class Data implements DBOperations {
 			}
 			return result;
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -193,7 +193,7 @@ public class Data implements DBOperations {
 
 			return availRecordNo;
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -211,7 +211,7 @@ public class Data implements DBOperations {
 
 			return cookie;
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
@@ -222,7 +222,7 @@ public class Data implements DBOperations {
 		if (this.isInitialized()) {
 			this.lockManager.unlock(recNo, cookie);
 		} else {
-			throw new IllegalStateException(Data.INITIALIZATION_ERROR_TEXT);
+			throw new IllegalStateException(Data.NON_INITIALIZATION_ERROR_TEXT);
 		}
 	}
 
