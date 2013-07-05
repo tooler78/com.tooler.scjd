@@ -36,6 +36,10 @@ logging can be very helpful when an issue occurs, a user may not be aware of the
 without prior reading of a User Guide. This can lead to frustration with regard to "What am I doing 
 wrong?" scenario. 
 
+Throughout the course of the document i will refer to the abbreviated text of CRUD. THis term stands 
+for Create, Read, Update, Delete. For the sake of brevity i will refer to the abbreviation 
+explanation now and only now.
+
 1.1 Package Structure
 
 The following package breakdown was used to organize classes of common functionality. These classes 
@@ -266,41 +270,43 @@ used the Adapter pattern to allow for invocation of methods on the DB interface.
 as the existing method API in the DB interface did not support remote invocation. Client can request
 a DB instance to operate its use cases on via the suncertify.application.DAOFactory. This class will 
 hand back a DB instance to the networked or standalone client (depending on the launch mode). This 
-DAO (data access object) contains all the possible methods to allow for CRUD (Create, Read, Update, 
-Delete) use cases to be executable. However to allow for safe interaction with the data layer, 
-certain method ordering is required to guarantee successful use case execution. With this in mind I 
-decided to use a service layer for all client model interaction and hide the DAO object below this 
-service layer. Benefit of this approach is that the client model will operate on the 
-suncertify.application.DBService who has a simple easy to understand API like for example 
-bookSubcontractor. However inside the DBService implementation, the DAO (DB instance) will allow for 
-locking, reading, updating and then finally unlocking the record, thus hiding the complex logic from 
-the client model.
+DAO (data access object) contains all the possible methods to allow for CRUD use cases to be 
+executable. However to allow for safe interaction with the data layer, certain method ordering is 
+required to guarantee successful use case execution. With this in mind I decided to use a service 
+layer for all client model interaction and hide the DAO object below this service layer. Benefit of 
+this approach is that the client model will operate on the suncertify.application.DBService who has 
+a simple easy to understand API like for example bookSubcontractor. However inside the DBService 
+implementation, the DAO (DB instance) will allow for locking, reading, updating and then finally 
+unlocking the record, thus hiding the complex logic from the client model.
 
 
 4.	Data Implementation
 ---------------------------
 
 As required, the Data class provides implementation logic for the methods contained in the DB 
-interface as was intended with the assignment. However, I have decided to introduce a new interface, 
-DBOperations, to allow two extra methods which i felt would be useful for my desired implementation. 
+interface as was specified in the assignment. However, I have decided to introduce a new interface, 
+DBOperations, to allow two extra methods which I felt would be useful for my desired implementation. 
 The DBOperations interface adds just two extra methods currently:
 	init (takes a parameter representing a .db file location)
 	destroy
 The "init" method is required to be performed before any CRUD methods supplied by the DB interface.
-The reason for this is that because I chose a singleton pattern for the Data class and therefore i 
+The reason for this is that because I chose a singleton pattern for the Data class and therefore I 
 need to allow for the singleton class to have different states (i.e. initialized). The init method 
-takes a pre-verified .db file as an argument. The init method will perform the following actions:
+takes a pre-verified .db file as an argument (i.e. file exists and has an extension of .db). The 
+init method will perform the following actions:
 	1.	Instantiate a worker class called FileAccess which does all the access and manipulation of 
-	the physical file that is our database.Having all the code here, instead of in the Data class, 
-	that the single responsibility principle is much easier to maintain and a cleaner design.
+	the physical file that is our database. Having all the code here, instead of in the Data class, 
+	supports the single responsibility principle and should allow for a much easier to maintain 
+	class and personally I believe a cleaner design.
 	2.	Requests the FileAccess class to get all records and store them in our cache data structure 
 	to be used for all CRUD requests.
 	3.	Instantiate an instance of LockManager which will be used to support safe access of multiple 
 	network client launched applications with regard to concurrent requests to our single instance 
 	of the server application.
 	4.	Set the Data class flag of initialized to true so that CRUD requests can be processed on 
-	request.
-The "destroy" method will reset the key elements of the Data class back to a pre initialized state.
+	demand.
+The "destroy" method will reset the key elements of the Data class back to a pre initialized state. 
+The following actions will be performed
 	1.	If the class had been previously initialized (i.e. FileAccess successfully initialized), 
 	then a request to flush the current cache out to the physical database file will be attempted.
 	2.	The field variable representing the FileAccess instance is set to null.
@@ -311,20 +317,29 @@ The "destroy" method will reset the key elements of the Data class back to a pre
 Both the "init" and "destory" methods are synchronized so as to protect the key use case of setting 
 up or tearing down the Data class without fear for any concurrent CRUD requests coming in and 
 resulting in corrupting the launched network clients making the CRUD request.
-No synchronization is being used for any of the methods from the DB interface. Instead, i will use a 
-ConcurrentSkipListMap keyed on the record, as read up from the database file, with a Subcontractor 
-object as the value object for the given record number key. I chose this type of data structure as 
-its a scalable concurrent map that is sorted according to the ordering of its keys (Insertion, 
-removal, update, and access operations safely execute concurrently by multiple threads). This was 
-useful for two reasons:
+No synchronization is being used for any of the methods from the DB interface. If a CRUD use case is 
+requested prior to initializing the Data class, an IllegalStateExeption will be thrown. I will use a 
+ConcurrentSkipListMap keyed on the record entry, as read up from the .db file, with a Subcontractor 
+object as the value object for the given record number key. I chose this type of data structure 
+because its a scalable concurrent map that is sorted according to the ordering of its keys 
+(Insertion, removal, update, and access operations safely execute concurrently by multiple threads). 
+This was useful for two reasons:
 	a)	I didn't want to have synchronized on the CRUD methods if possible. I have the LockManager 
 	to handle the concurrency of multiple network clients and synchronizing on the methods would 
-	only cause a second layer of handling multi-threaded requests.
-	b) ConcurrentSkipListMap support ordering. This is an important feature because the assignment 
+	only cause a second layer of multi-threaded request handling.
+	b) ConcurrentSkipListMap supports ordering. This is an important feature because the assignment 
 	specified the re-use of deleted records - Therefore the natural order of records read in and 
 	manipulated during the runtime of the server application needs to be maintained when writing 
 	back out to the database on request to "destroy".
-
+The Data class "init" method may be called multiple times (i.e. when launched in server mode, for 
+example, if the .db file fails to have the expected cookie value, as set out in the DatabaseSchema 
+class, then the user will be allowed to retry to select the correct .db file. The "destroy" method 
+is currently called on shutdown of the application via the GracefulShutdownHook class. The cache is 
+wrote out to the file only on exit of the application. One future improvement could be to 
+periodically save the manipulated cache so as to prevent any issue occurring where a long running 
+server instance looses the delta between start and exit of the application. I decided not to 
+implement the periodic saving of records as it was a remote scenario where the closing of the 
+application would fail to be persisted to file.
 
 
 5.	Locking
