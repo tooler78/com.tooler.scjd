@@ -14,6 +14,13 @@ import suncertify.domain.Subcontractor;
 /**
  * Implementation of the {@link DBOperations} interface that operates directly
  * on a data file.
+ * <p>
+ * Singleton implementation of the representation of the database file.
+ * <p>
+ * <b>NOTE:</b> Prior to any CRUD requests of methods available in the
+ * {@link DB} interface, the {@link DBOperations#init(String)}
+ * <b><i>must</i></b> be requested. Failure to do so will result in an
+ * <code>IllegalStateException</code> occuring.
  * 
  * @version 1.0
  * @author Damien O'Toole

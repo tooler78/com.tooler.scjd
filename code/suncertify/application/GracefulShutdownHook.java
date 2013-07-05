@@ -46,7 +46,7 @@ public class GracefulShutdownHook extends Thread {
 		}
 
 		if (launchMode.isServer() || launchMode.isStandalone()) {
-			this.saveAllDataToFile();
+			this.destroyData();
 		}
 	}
 
@@ -63,7 +63,7 @@ public class GracefulShutdownHook extends Thread {
 		}
 	}
 
-	private void saveAllDataToFile() {
+	private void destroyData() {
 		try {
 			Data.getInstance().destroy();
 		} catch (final DatabaseException databaseException) {

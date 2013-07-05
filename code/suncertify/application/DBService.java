@@ -231,9 +231,8 @@ public class DBService {
 	 *            and server.
 	 */
 	private void handleCommunicationException(final CommunicationException communicationException) {
-		LaunchApplication
-				.showErrorAndExit("Communication issue encountered with remote server."
-						+ "\nServer is no longer contactable so this client instance must be exited!");
+		LaunchApplication.showErrorAndExit("Communication issue encountered with remote server."
+				+ "\nServer is no longer contactable so this client instance must be exited!");
 	}
 
 }

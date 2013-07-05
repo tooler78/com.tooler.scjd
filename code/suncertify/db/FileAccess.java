@@ -99,6 +99,12 @@ class FileAccess {
 			FileAccess.database.readFully(input);
 		}
 
+		/**
+		 * The Class SingleRecordReader.
+		 * <p>
+		 * Responsible for reading a single record representing all the
+		 * available fields for that record in one instance.
+		 */
 		class SingleRecordReader {
 			private int offSet = 0;
 

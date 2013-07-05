@@ -13,8 +13,7 @@ public class DataClassTest {
 	public void startTests() {
 		try {
 
-			Data.getInstance()
-					.init(ApplicationProperties.getInstance().getDatabaseLocation());
+			Data.getInstance().init(ApplicationProperties.getInstance().getDatabaseLocation());
 			/*
 			 * Practically, it is not necessary to execute this loop more than 1
 			 * time, but if you want, you can increase the controller variable,
