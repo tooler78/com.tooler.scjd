@@ -191,8 +191,8 @@ entered.
 Client and server had successfully worked but however there is now an issue with regard to the user 
 selecting any of the use cases via the network client GUI where a response is expected from the 
 server instance. The most likely reason for this type of error is probably because the server is no 
-longer contactable. To protect the user from the scenario where the client is now out-of-date should 
-(even if a new server instance be launched again0, this running network client will now exit and 
-require a re-launch.
+longer contactable. To protect the user from the scenario where the client is now out-of-date (even 
+if a new server instance be launched again), this running network client will now exit and require 
+a re-launch.
 
 =================================================
