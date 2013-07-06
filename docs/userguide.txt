@@ -22,6 +22,8 @@ Table of Contents
 5.5 There is currently no Subcontractor selected in the table
 5.6 The selected Subcontractor is already booked
 5.7 The selected Subcontractor information can not be found
+5.8 Failed to connect to the Remote Server Application
+5.9	Communication issue encountered with remote server
 
 =================================================
 
@@ -177,5 +179,20 @@ When attempting to book a Subcontractor who has already been deleted by another 
 the presented list of Subcontractors in a specific client may not reflect the most up-to-date status 
 for all Subcontractors, and therefore when performing a booking task, what appears as a valid 
 Subcontractor, may have been deleted by another client.
+
+5.8 Failed to connect to the Remote Server Application
+When launching the application in network client mode (i.e. no command line parameters used during 
+application launch), where no server instance is available to communicate with. This type of error 
+is possible where the port number and server name (or IP address) have been validated as a 
+contactable IP address but perhaps the server is not running on the server name/port combination 
+entered. 
+
+5.9	Communication issue encountered with remote server
+Client and server had successfully worked but however there is now an issue with regard to the user 
+selecting any of the use cases via the network client GUI where a response is expected from the 
+server instance. The most likely reason for this type of error is probably because the server is no 
+longer contactable. To protect the user from the scenario where the client is now out-of-date should 
+(even if a new server instance be launched again0, this running network client will now exit and 
+require a re-launch.
 
 =================================================
