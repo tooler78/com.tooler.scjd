@@ -188,11 +188,10 @@ contactable IP address but perhaps the server is not running on the server name/
 entered. 
 
 5.9	Communication issue encountered with remote server
-Client and server had successfully worked but however there is now an issue with regard to the user 
-selecting any of the use cases via the network client GUI where a response is expected from the 
-server instance. The most likely reason for this type of error is probably because the server is no 
-longer contactable. To protect the user from the scenario where the client is now out-of-date (even 
-if a new server instance be launched again), this running network client will now exit and require 
-a re-launch.
+Client and server communication had successfully worked but however there is now an issue with 
+regard to the user selecting any of the use cases via the network client GUI where a response is 
+expected from the server instance. The most likely reason for this type of error is probably because 
+the server is no longer contactable. The client exits at this point and will require a re-launch 
+once the server issue has been successfully corrected.
 
 =================================================
