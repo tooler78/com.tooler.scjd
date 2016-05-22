@@ -1,0 +1,10 @@
+# intellij files
+*.iml
+
+# eclipse files
+.classpath
+.settings
+.project
+
+# build directory
+target
