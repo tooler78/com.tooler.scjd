@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: com.tooler.scjd
+  annotations:
+    github.com/project-slug: tooler78/com.tooler.scjd
+spec:
+  type: other
+  lifecycle: unknown
+  owner: tooler78
