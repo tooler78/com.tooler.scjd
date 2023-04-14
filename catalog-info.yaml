@@ -6,5 +6,5 @@ metadata:
     github.com/project-slug: tooler78/com.tooler.scjd
 spec:
   type: JSE
-  lifecycle: experimental
+  lifecycle: stable
   owner: tooler78
